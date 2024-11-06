@@ -25,5 +25,5 @@ pnpm-debug.log*
 .vscode
 
 # certificates 
-*.ctr
+*.crt
 *.key
