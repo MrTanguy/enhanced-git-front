@@ -52,3 +52,36 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## HTTPS - Certificats 
+
+### mkcert, generate certificats 
+```
+cd certs 
+mkcert create-ca
+mkcert create-cert
+```
+
+### ViteJs
+
+```
+npm install -D @vitejs/plugin-basic-ssl
+```
+
+In astro.config.mjs
+
+````
+import basicSsl from '@vitejs/plugin-basic-ssl';
+
+export default defineConfig ({
+    vite: {
+        plugins: [basicSsl()],
+        server: {
+            https: {
+                key: './certs/cert.key',
+                cert: './certs/cert.crt'
+            }
+        }
+    },
+});
+```
