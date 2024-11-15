@@ -1,19 +1,18 @@
 import { useState } from 'react';
 
 function Login() {
-  // Gestion des champs du formulaire avec useState
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Fonction appelée lors de la soumission du formulaire
   const handleSubmit = (event) => {
-    event.preventDefault(); // Empêche le rechargement de la page
+    event.preventDefault();
 
     console.log("paf")
 
     const formData = new FormData();
-    formData.append("username", email); // Remplace 'email' par la variable qui stocke l'email
+    formData.append("username", email);
     formData.append("password", password);
 
     console.log(formData)
@@ -32,11 +31,11 @@ function Login() {
           throw new Error(errorData.detail);
         });
       }
+      setErrorMessage("")
       return response.json()
     })
     .then(data => {
-      console.log(data); // Affiche les données renvoyées par le backend (ex. token)
-      // Traite les données de réponse ici
+      console.log(data);
     })
     .catch(error => {
       setErrorMessage(error.message);
