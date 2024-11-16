@@ -10,8 +10,8 @@ export default defineConfig({
         plugins: [basicSsl()],
         server: {
           https: {
-            key: './certs/cert.key',
-            cert: './certs/cert.crt'
+            key: './cert/cert.key',
+            cert: './cert/cert.crt'
           }
         }
     },
