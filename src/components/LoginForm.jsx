@@ -9,8 +9,6 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("paf")
-
     const formData = new FormData();
     formData.append("username", email);
     formData.append("password", password);
@@ -41,7 +39,7 @@ function Login() {
       setErrorMessage(error.message);
     })
   };
-
+  /*
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
       <form onSubmit={handleSubmit} style={{ maxWidth: '400px', width: '100%', padding: '20px', border: '1px solid #ccc', borderRadius: '10px' }}>
@@ -73,12 +71,33 @@ function Login() {
 
         <button 
           type="submit" 
-          style={{ width: '100%', padding: '10px', backgroundColor: '#28a745', color: '#fff', borderRadius: '5px', border: 'none', cursor: 'pointer' }}>
+          style={{ width: '100%', padding: '10px', backgroundColor: '#739BF2', color: '#fff', borderRadius: '5px', border: 'none', cursor: 'pointer' }}>
           Se connecter
         </button>
       </form>
     </div>
   );
+  */
+
+
+  return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+      <div style={{ width: "50%", height: "70%", backgroundColor: "#F7F1F2", display: "flex", justifyContent: "space-between", alignItems: "center", border: "5px solid #739BF2"}}>
+        <div style={{ backgroundColor: "#FFFFFF"}}>aaa</div>
+        <div style={{ backgroundColor: "#FFFFFF", height: "100%", width: "35%", display: "flex", justifyContent: "center", alignItems: "center"}}>
+          <div style={{}}>
+            No account ?
+          </div>
+          <div>
+            Register
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
+
+
+
 
 export default Login;
