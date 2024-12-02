@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../../public/css/App.css';
 
 function Login() {
   
@@ -6,7 +7,6 @@ function Login() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [registerIsHovered, setRegisterIsHovered] = useState(false);
-  const [loginIsHovered, setLoginIsHovered] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -42,52 +42,17 @@ function Login() {
     })
   };
 
-  /*
-  bleu foncé : #4A81F8
-  bleu : #739BF2
-  bleu clair : #A8C0F3
-
-  gris foncé : #404040
-  gris : #A6A8AD
-  gris clair : #F7F1F2
-  */
-
   const registerButtonStyle = {
     borderRadius: "10px", 
-    border: "2px solid #F7F1F2",
     backgroundColor: "#F7F1F2", 
     color: "#4A81F8", 
-    padding: "3px",
+    padding: "5%",
     fontSize: "1.5vw",
     marginTop: "10px",
     boxShadow: registerIsHovered ? "0 4px 10px rgba(0, 0, 0, 0.5)" : "",
     cursor: "pointer",
     transition: "box-shadow 0.3s ease"
-  } 
-
-  const loginButtonStyle = {
-    width: '100%',
-    padding: '12px',
-    backgroundColor: '#739BF2',
-    color: '#fff',
-    borderRadius: '5px',
-    border: 'none',
-    cursor: 'pointer',
-    fontSize: '1.5vw',
-    boxShadow: loginIsHovered ? "0 4px 10px rgba(0, 0, 0, 0.5)" : "",
-    cursor: "pointer",
-    transition: "box-shadow 0.3s ease"
-  }
-
-  const inputStyle = {
-    width: '100%',
-    padding: '10px',
-    borderRadius: '5px',
-    border: '2px solid #739BF2',
-    fontSize: '1.2vw',
-    outline: 'none',
-    transition: 'border-color 0.3s ease',
-  }
+  }   
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
@@ -96,40 +61,40 @@ function Login() {
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
             <div style={{ fontSize: "2vw", marginBottom: "20px", color: "#4A81F8" }}>Connexion</div>
             <form onSubmit={handleSubmit} style={{ width: "100%" }}>
-              <div>
-                <label style={{ display: "block", marginBottom: "5px", fontSize: "1.2vw", color: "#404040" }}>Email :</label>
+              <div style={{ marginBottom: "2%" }}>
                 <input 
                   type="email" 
                   value={email} 
                   onChange={(e) => setEmail(e.target.value)} 
                   required 
-                  style={ inputStyle } 
+                  placeholder="Email"
+                  className='inputStyle'
                 />
               </div>
-
-              <div>
-                <label style={{ display: "block", marginBottom: "5px", fontSize: "1.2vw", color: "#404040" }}>Mot de passe :</label>
+              <div style={{ marginBottom: "2%" }}>
                 <input 
                   type="password" 
                   value={password} 
                   onChange={(e) => setPassword(e.target.value)} 
                   required 
-                  style={ inputStyle } 
+                  placeholder="Password"
+                  className='inputStyle'
                 />
               </div>
 
               {errorMessage && <p style={{ color: 'red', fontSize: '1.2vw' }}>{errorMessage}</p>}
-
-              <button 
-                type="submit" 
-                style={ loginButtonStyle } onMouseEnter={() => setLoginIsHovered(true)} onMouseLeave={() => setLoginIsHovered(false)}>
-                Login
-              </button>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <button 
+                  type="submit" 
+                  className='loginButtonStyle'>
+                  Login
+                </button>
+              </div>
             </form>
           </div>
         </div>
         <div style={{ height: "100%", width: "35%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
-            <img src="/loginimage.svg" style={{ width: "100%", height: "100%", objectFit: "fill" }}/>
+            <img src="/svg/loginimage.svg" style={{ width: "100%", height: "100%", objectFit: "fill" }} alt='LoginSVG'/>
             <div style={{ position: "absolute", color: "#F7F1F2", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
             <div style={{ fontSize: "2vw" }}>
               New here ?
