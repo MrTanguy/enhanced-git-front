@@ -116,10 +116,10 @@ function Register() {
       };
 
     return (
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "90vh" }}>
           <div style={{ width: "60%", height: "70%", backgroundColor: "#F7F1F2", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
             <div style={{ height: "100%", width: "65%", border: "5px solid #739BF2", borderRight: 0, boxSizing: "border-box", display: "flex", justifyContent: "center"}}>
-              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", width: "60%" }}>
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", width: "50%" }}>
                 <div style={{ fontSize: "2vw", marginBottom: "20px", color: "#4A81F8" }}>Register</div>
                 <form onSubmit={handleSubmit} style={{ width: "100%" }}>
                   <div style={{ marginBottom: "2%" }}>
@@ -161,7 +161,7 @@ function Register() {
                     />
                   </div>
                   {confirmPasswordError && <p style={{ color: "red", fontSize: "12px" }}>{emailError}</p>}
-                  {errorMessage && <p style={{ color: 'red', fontSize: '1.2vw' }}>{errorMessage}</p>}
+                  {errorMessage && <p style={{ color: 'red', fontSize: '20px' }}>{errorMessage}</p>}
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <button 
                       type="submit" 

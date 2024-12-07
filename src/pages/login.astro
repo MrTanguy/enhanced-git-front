@@ -1,9 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import LoginForm from '../components/LoginForm';
+import { AuthProvider } from '../hooks/AuthProvider';
 ---
 <Layout title='Login'>
-    <main>
-        <LoginForm client:load />
-    </main>
+    <AuthProvider>
+        <main>
+            <LoginForm client:load />
+        </main>
+    </AuthProvider>
 </Layout>
