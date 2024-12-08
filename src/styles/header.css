@@ -1,0 +1,35 @@
+#background {
+    box-sizing: border-box;
+    background-color: #F7F1F2;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 5px solid #A6A8AD;
+    padding: 0 2%;
+}
+
+#svg-menu {
+    width: 60%;
+    height: 60%;
+    display: flex;
+}
+
+#logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#svg-logo {
+    width: 60%;
+    height: 60%;
+}
+
+#svg-user {
+    display: flex;
+    width: 60%;
+    height: 60%;
+}
