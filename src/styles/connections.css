@@ -37,6 +37,11 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     transition: box-shadow 0.3s ease;
   }
+  .submitButtonStyle:disabled {
+    background-color: #cccccc; 
+    opacity: 0.6; 
+    box-shadow: none
+  }
   
   .swapLoginButtonStyle {
     border-radius: 10px;

@@ -15,7 +15,7 @@ const LoginForm = () => {
 
     try {
       await login(email, password)
-      navigate("/")
+      navigate("/dashboard")
     } catch (err) {
       setErrorMessage(err.message)
     }
