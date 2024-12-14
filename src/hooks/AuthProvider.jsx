@@ -4,7 +4,14 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
-    const [bearerToken, setBearerToken] = useState(null);
+    const [bearerToken, setBearerToken] = useState(() => {
+        return localStorage.getItem('bearerToken');
+    });
+
+    const saveToken = (token) => {
+        setBearerToken(token);
+        localStorage.setItem('bearerToken', token); 
+    };
 
     const login = async (email, password) => {
         try {
@@ -27,7 +34,7 @@ export const AuthProvider = ({ children }) => {
             }
     
             const data = await response.json();
-            setBearerToken(data.bearer); 
+            saveToken(data.bearer)
         } catch (error) {
             throw error; 
         }
@@ -54,7 +61,7 @@ export const AuthProvider = ({ children }) => {
             }
     
             const data = await response.json();
-            setBearerToken(data.bearer); 
+            saveToken(data.bearer)
         } catch (error) {
             throw error; 
         }
