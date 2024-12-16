@@ -17,7 +17,7 @@ function Header() {
                 </svg>
             </a>
 
-            <a href='/login'>
+            <a href='/dashboard'>
                 <svg id="svg-user" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="none" viewBox="0 0 60 60">
                     <path stroke="#739BF2" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" d="M22.5 37.5h15A12.5 12.5 0 0 1 50 50a2.5 2.5 0 0 1-2.5 2.5h-35A2.5 2.5 0 0 1 10 50a12.5 12.5 0 0 1 12.5-12.5Zm7.5-10c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10Z"/>
                 </svg>

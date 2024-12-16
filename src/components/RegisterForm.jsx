@@ -87,11 +87,11 @@ function RegisterForm() {
                         <div style={{ fontSize: '2vw', marginBottom: '20px', color: '#4A81F8' }}>Register</div>
                           <form onSubmit={handleSubmit} style={{ width: '100%' }}>
                               <div style={{ marginBottom: '2%' }}>
-                                  <input type="email" value={email} onChange={handleEmailChange} required placeholder="Email"  className="inputStyle" />
+                                  <input type="email" value={email} onChange={handleEmailChange} required placeholder="Email"  className="input" />
                               </div>
                               {emailError && <p style={{ color: 'red', fontSize: '12px' }}>{emailError}</p>}
                               <div style={{ marginBottom: '2%' }}>
-                                  <input type="password" value={password} onChange={handlePasswordChange}  required placeholder="Password" className="inputStyle" />
+                                  <input type="password" value={password} onChange={handlePasswordChange}  required placeholder="Password" className="input" />
                               </div>
                               {passwordError.length > 0 && (
                                   <ul style={{ color: 'red', fontSize: '12px' }}>
@@ -99,12 +99,12 @@ function RegisterForm() {
                                   </ul>
                               )}
                               <div style={{ marginBottom: '2%' }}>
-                                  <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} required placeholder="Confirm password" className="inputStyle" />
+                                  <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} required placeholder="Confirm password" className="input" />
                               </div>
                               {confirmPasswordError && <p style={{ color: 'red', fontSize: '12px' }}>{confirmPasswordError}</p>}
                               {errorMessage && <p style={{ color: 'red', fontSize: '20px' }}>{errorMessage}</p>}
                               <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                  <button type="submit" className="submitButtonStyle" disabled={!isFormValid}>
+                                  <button type="submit" className="submitButton" disabled={!isFormValid}>
                                       Register
                                   </button>
                               </div>
@@ -117,7 +117,7 @@ function RegisterForm() {
                           <div style={{ fontSize: "1.2vw" }}>
                             Already have an account ?
                           </div>
-                          <a className='swapLoginButtonStyle' onClick={() => {navigate('/login')}}>
+                          <a className='swapLoginButton' onClick={() => {navigate('/login')}}>
                             Login
                           </a>
                       </div>

@@ -1,20 +1,31 @@
+import { useState } from 'react';
+import ReactDOM from "react-dom";
+import ModalConnections from '../components/ModalConnections';
+import '../styles/dashboard.css'
+import { Children } from 'react';
 
 const Dashboard = () => {
+    const [showModalConnections, setShowModalConnections] = useState(false);
 
     return(
         <div>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-                <div style={{ fontSize: "30px" }}>Connexions</div>
-                <div style={{ width: "20%", backgroundColor: "#739BF2", height: "5px", borderRadius: "20px"}}></div>
+            <div className='titleDiv'>
+                <div className='titleDiv-font'>Connexions</div>
+                <div className='titleDiv-underline'></div>
             </div>
-            <div style={{ margin: "1% 3%", display:"flex", flexWrap: "wrap", gap: "16px", justifyContent:"center" }} >
-                <div style={{ border:"2px solid #739BF2", width:"150px", height:"200px", display:"flex", justifyContent:"center", alignItems:"center", borderRadius:"20px"}} >
-                    <img src="/plus.svg" style={{ width: "50%", height: "50%", objectFit: "fill" }} alt='PlusSVG'/>
+            <div className='container'>
+                <div className='plusCard' onClick={() => setShowModalConnections(true)} >
+                    <img className='plusSvg' src="/plus.svg" alt='PlusSVG'/>
                 </div>
+                {/* Page modal pour choisir la connexion souhaitée */}
+                {showModalConnections && ReactDOM.createPortal(
+                    <ModalConnections onClose={() => {setShowModalConnections(false)}} />,
+                    document.body
+                )}
             </div>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-                <div style={{ fontSize: "30px" }}>Portfolios</div>
-                <div style={{ width: "20%", backgroundColor: "#739BF2", height: "5px", borderRadius: "20px"}}></div>
+            <div className='titleDiv'>
+                <div className='titleDiv-font'>Portfolios</div>
+                <div className='titleDiv-underline'></div>
             </div>
         </div>    
     )  

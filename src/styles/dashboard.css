@@ -1,0 +1,41 @@
+.titleDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.titleDiv-font {
+    font-size: 30px;
+}
+
+.titleDiv-underline {
+    width: 20%;
+    background-color: #739BF2;
+    height: 5px; 
+    border-radius: 20px;
+}
+
+.container {
+    margin: 2%; 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 16px; 
+    justify-content: center;
+}
+
+.plusCard {
+    border: 2px solid #739BF2; 
+    width: 150px; 
+    height: 200px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    border-radius: 20px;
+}
+
+.plusSvg {
+    width: 50%; 
+    height: 50%; 
+    object-fit: fill;
+}
