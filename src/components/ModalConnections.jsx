@@ -6,9 +6,19 @@ export default function ModalConnections({ onClose }) {
             <div className='modalDiv' onClick={(e) => e.stopPropagation()}>
                 <div className='title'>Choose your connection :</div>
                 <div className='subtitle'>Developer :</div>
-                <div className='siteDiv'>
-                    <img src='./github.svg' className='githubSvg' ></img>
-                    <div className='siteName'>Github</div>
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <div className='siteDiv'>
+                        <img src='./github.svg' className='githubSvg' ></img>
+                        <div className='siteName'>Github</div>
+                    </div>
+                    <div className='siteDiv'>
+                        <img src='./github.svg' className='githubSvg' ></img>
+                        <div className='siteName'>Github</div>
+                    </div>
+                    <div className='siteDiv'>
+                        <img src='./github.svg' className='githubSvg' ></img>
+                        <div className='siteName'>Github</div>
+                    </div>
                 </div>
                 <button onClick={onClose} style={{ marginTop: "20px", padding: "10px 20px" }}>
                     Fermer
