@@ -9,9 +9,9 @@ import ProtectedRoute from './components/ProtectedRoute'
 function App() {
 
   return (
-    <AuthProvider>
-      <Header />
-      <Router>
+    <Router>
+      <AuthProvider>
+        <Header />
         <Routes>
           {/* Route publique */}
           <Route path='/login' element={<Login />}></Route>
@@ -20,8 +20,8 @@ function App() {
           {/* Route protégées */}
           <Route path='/dashboard' element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>}></Route>
         </Routes>
-      </Router>
-    </AuthProvider>
+        </AuthProvider>
+    </Router>
   )
 }
 
