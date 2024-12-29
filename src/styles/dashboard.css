@@ -26,16 +26,23 @@
 
 .plusCard {
     border: 2px solid #739BF2; 
-    width: 150px; 
-    height: 200px; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     border-radius: 20px;
 }
 
+.plusCardConnections {
+    width: 15vh; 
+    height: 20vh;
+}
+
+.plusCardPortfolios {
+    width: 30vh; 
+    height: 20vh;
+}
+
 .plusSvg {
-    width: 50%; 
-    height: 50%; 
-    object-fit: fill;
+    width: 8vh; 
+    height: 8vh; 
 }

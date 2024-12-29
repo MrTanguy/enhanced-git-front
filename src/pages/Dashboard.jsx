@@ -14,7 +14,7 @@ const Dashboard = () => {
                 <div className='titleDiv-underline'></div>
             </div>
             <div className='container'>
-                <div className='plusCard' onClick={() => setShowModalConnections(true)} >
+                <div className='plusCard plusCardConnections' onClick={() => setShowModalConnections(true)} >
                     <img className='plusSvg' src="/plus.svg" alt='PlusSVG'/>
                 </div>
                 {/* Page modal pour choisir la connexion souhaitée */}
@@ -26,6 +26,11 @@ const Dashboard = () => {
             <div className='titleDiv'>
                 <div className='titleDiv-font'>Portfolios</div>
                 <div className='titleDiv-underline'></div>
+            </div>
+            <div className='container'>
+                <div className='plusCard plusCardPortfolios' >
+                    <img className='plusSvg' src="/plus.svg" alt='PlusSVG'/>
+                </div>
             </div>
         </div>    
     )  
