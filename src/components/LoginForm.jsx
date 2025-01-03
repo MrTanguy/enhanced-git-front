@@ -35,7 +35,7 @@ const LoginForm = () => {
                   onChange={(e) => setEmail(e.target.value)} 
                   required 
                   placeholder="Email"
-                  className='inputStyle'
+                  className='input'
                 />
               </div>
               <div style={{ marginBottom: "2%" }}>
@@ -45,14 +45,14 @@ const LoginForm = () => {
                   onChange={(e) => setPassword(e.target.value)} 
                   required 
                   placeholder="Password"
-                  className='inputStyle'
+                  className='input'
                 />
               </div>
               {errorMessage && <p style={{ color: 'red', fontSize: '1.2vw' }}>{errorMessage}</p>}
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <button 
                   type="submit" 
-                  className='submitButtonStyle'>
+                  className='submitButton'>
                   Login
                 </button>
               </div>
@@ -65,7 +65,7 @@ const LoginForm = () => {
             <div style={{ fontSize: "1.2vw" }}>
             New here ?
             </div>
-            <a className='swapLoginButtonStyle' onClick={() => navigate("/register") }>
+            <a className='swapLoginButton' onClick={() => navigate("/register") }>
             Register
             </a>
           </div>

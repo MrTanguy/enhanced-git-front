@@ -9,7 +9,7 @@
   gris clair : #F7F1F2
 */
 
-.inputStyle {
+.input {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
@@ -21,7 +21,7 @@
     margin-top: 5%;
   }
   
-  .submitButtonStyle {
+  .submitButton {
     width: 60%;
     padding: 10px;
     background-color: #739BF2;
@@ -33,17 +33,17 @@
     box-sizing: border-box;
     margin-top: 10%;
   }
-  .submitButtonStyle:hover {
+  .submitButton:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     transition: box-shadow 0.3s ease;
   }
-  .submitButtonStyle:disabled {
+  .submitButton:disabled {
     background-color: #cccccc; 
     opacity: 0.6; 
     box-shadow: none
   }
   
-  .swapLoginButtonStyle {
+  .swapLoginButton {
     border-radius: 10px;
     background-color: #F7F1F2;
     color: #4A81F8;
@@ -52,7 +52,7 @@
     margin-top: 10px;
     cursor: pointer;
   } 
-  .swapLoginButtonStyle:hover {
+  .swapLoginButton:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     transition: box-shadow 0.3s ease;
   }
