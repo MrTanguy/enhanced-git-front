@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     const [bearerToken, setBearerToken] = useState(() => {
         return localStorage.getItem('bearerToken');
@@ -21,7 +22,7 @@ export const AuthProvider = ({ children }) => {
             formData.append("username", email);
             formData.append("password", password);
     
-            const response = await fetch('https://127.0.0.1:8000/auth/token', {
+            const response = await fetch(`${apiUrl}/auth/token`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -49,7 +50,7 @@ export const AuthProvider = ({ children }) => {
             formData.append("username", email);
             formData.append("password", password);
     
-            const response = await fetch('https://127.0.0.1:8000/auth/register', {
+            const response = await fetch(`${apiUrl}/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -72,7 +73,7 @@ export const AuthProvider = ({ children }) => {
     const refresh = async () => {
         console.log('refresh');
         try {
-            const response = await fetch('https://127.0.0.1:8000/auth/refresh', {
+            const response = await fetch(`${apiUrl}/auth/refresh`, {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -96,7 +97,7 @@ export const AuthProvider = ({ children }) => {
 
     const getOAuthUrl = async (website) => {
         try {
-            const response = await fetch(`https://127.0.0.1:8000/auth/oauthurl?website=${encodeURIComponent(website)}`, {
+            const response = await fetch(`${apiUrl}/auth/oauthurl?website=${encodeURIComponent(website)}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${bearerToken}`,
