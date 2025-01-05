@@ -2,7 +2,6 @@ import { useState } from 'react';
 import ReactDOM from "react-dom";
 import ModalConnections from '../components/ModalConnections';
 import '../styles/dashboard.css'
-import { Children } from 'react';
 
 const Dashboard = () => {
     const [showModalConnections, setShowModalConnections] = useState(false);

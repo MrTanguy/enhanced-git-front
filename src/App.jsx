@@ -3,6 +3,7 @@ import { AuthProvider } from './hooks/AuthProvider'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
+import Callback from './pages/Callback'
 import Header from './components/Header'
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -19,8 +20,9 @@ function App() {
 
           {/* Route protégées */}
           <Route path='/dashboard' element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>}></Route>
+          <Route path='/oauth/callback' element={ <ProtectedRoute> <Callback /> </ProtectedRoute>}></Route>
         </Routes>
-        </AuthProvider>
+      </AuthProvider>
     </Router>
   )
 }
