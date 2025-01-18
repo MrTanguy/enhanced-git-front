@@ -5,6 +5,7 @@ import apiService from '../services/api/ApiService';
 const Callback = () => {
     const navigate = useNavigate();
     const isEffectExecuted = useRef(false); 
+    const { sendAccessToken } = apiService();
 
     useEffect(() => {
         if (!isEffectExecuted.current) {
@@ -15,19 +16,8 @@ const Callback = () => {
             const site = params.get('site');
 
             if (code) {
-                const { sendAccessToken } = apiService();
-
-                fetch('http://votre-api/backend/oauth/callback', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ code, site }),
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log('Réponse backend :', data);
-                    navigate('/dashboard'); 
-                })
-                    .catch((error) => console.error('Erreur lors de la requête :', error));
+                sendAccessToken(code, site)
+                navigate('/dashboard')
             }
         }
     }, [navigate]);

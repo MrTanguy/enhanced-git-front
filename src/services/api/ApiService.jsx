@@ -24,26 +24,46 @@ const apiService = () => {
         try {
 
             const formData = new URLSearchParams();
-            formData.append("accessToken", code);
+            formData.append("code", code);
             formData.append("website", website)
 
-            const response = await apiFetch(`${apiUrl}/auth/oauthToken`, {
+            const response = await apiFetch(`${apiUrl}/auth/oauthtoken`, {
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
                 body: formData,
             }, bearerToken, refresh);
 
             if (response.ok) {
                 const data = await response.json();
-                console.log(data)
+                return data
             }
         } catch (error) {
             console.error("Error :", error);
         }
     }
 
+    const getUserData = async () => {
+
+        try {
+            const response = await apiFetch(`${apiUrl}/auth/userdata`, {
+                method: "GET"
+            }, bearerToken, refresh)
+
+            if (response.ok) {
+                return await response.json()
+            }
+
+        } catch (error) {
+            console.error("Error :", error)
+        }
+    }
+
     return {
         getOAuthUrl,
-        sendAccessToken
+        sendAccessToken,
+        getUserData
     };
 };
 
