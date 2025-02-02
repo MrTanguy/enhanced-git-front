@@ -27,9 +27,18 @@
 .plusCard {
     border: 2px solid #739BF2; 
     display: flex; 
+    flex-direction: column;
     justify-content: center; 
     align-items: center; 
     border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.plusCard:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .plusCardConnections {
@@ -45,4 +54,38 @@
 .plusSvg {
     width: 8vh; 
     height: 8vh; 
+}
+
+.connectionSvg {
+    width: 8vh; 
+    height: 8vh;
+}
+
+.titleCard {
+    text-align: center;
+    font-weight: 700;
+    max-width: 90%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.deleteButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.deleteIcon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.5;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.deleteIcon:hover {
+    opacity: 1;
 }

@@ -7,7 +7,7 @@ const apiService = () => {
 
     const getOAuthUrl = async (website) => {
         try {
-            const response = await apiFetch(`${apiUrl}/auth/oauthurl?website=${website}`, {
+            const response = await apiFetch(`${apiUrl}/connect/url?website=${website}`, {
                 method: "GET",
             }, bearerToken, refresh);
 
@@ -27,7 +27,7 @@ const apiService = () => {
             formData.append("code", code);
             formData.append("website", website)
 
-            const response = await apiFetch(`${apiUrl}/auth/oauthtoken`, {
+            const response = await apiFetch(`${apiUrl}/connect/token`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
@@ -47,7 +47,7 @@ const apiService = () => {
     const getUserData = async () => {
 
         try {
-            const response = await apiFetch(`${apiUrl}/auth/userdata`, {
+            const response = await apiFetch(`${apiUrl}/user/data`, {
                 method: "GET"
             }, bearerToken, refresh)
 
@@ -60,10 +60,28 @@ const apiService = () => {
         }
     }
 
+    const deleteConnection = async (id) => {
+        try {
+            const response = await apiFetch(`${apiUrl}/connect/delete/${id}`, {
+                method: "DELETE"
+            }, bearerToken, refresh)
+
+            if (!response.ok) {
+                throw new Error(`Erreur ${response.status}: ${await response.text()}`);
+            }
+
+            console.log("Connexion supprimée avec succès !");
+        } catch (error) {
+            console.error("Error :", error)
+        }
+
+    }
+
     return {
         getOAuthUrl,
         sendAccessToken,
-        getUserData
+        getUserData,
+        deleteConnection
     };
 };
 

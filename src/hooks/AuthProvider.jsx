@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }) => {
     };
 
     const refresh = async () => {
-        console.log("refresh");
         try {
             const response = await fetch(`${apiUrl}/auth/refresh`, {
                 method: "GET",

@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import ReactDOM from "react-dom";
 import ModalConnections from '../components/ModalConnections';
+import ConnectionCard from '../components/ConnectionCard';
 import { useNavigate } from 'react-router-dom';
 import apiService from '../services/api/ApiService';
 import '../styles/dashboard.css'
@@ -39,13 +40,10 @@ const Dashboard = () => {
                     <ModalConnections onClose={() => {setShowModalConnections(false)}} />,
                     document.body
                 )}
+
                 {userData && userData.connections.length > 0 && (
                     userData.connections.map((connection, index) => (
-                        <div key={index} className='plusCard'>
-                            <p>{connection.website}</p>
-                            <p> {connection.username}</p>
-                            <p> {connection.id}</p>
-                        </div>
+                        <ConnectionCard key={index} connection={connection} setUserData={setUserData} />
                     ))
                 )}
             </div>
