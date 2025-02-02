@@ -1,11 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import ReactDOM from "react-dom";
 import ModalConnections from '../components/ModalConnections';
+import ConnectionCard from '../components/ConnectionCard';
+import { useNavigate } from 'react-router-dom';
+import apiService from '../services/api/ApiService';
 import '../styles/dashboard.css'
-import { Children } from 'react';
 
 const Dashboard = () => {
     const [showModalConnections, setShowModalConnections] = useState(false);
+    const navigate = useNavigate();
+    const isEffectExecuted = useRef(false); 
+    const { getUserData } = apiService();
+    const [userData, setUserData] = useState(null);
+
+    useEffect(() => {
+        if (!isEffectExecuted.current) {
+            isEffectExecuted.current = true; 
+
+            getUserData()
+            .then(data => setUserData(data))
+            .catch(error => {
+                console.error("Erreur lors de la récupération des données utilisateur :", error);
+            });
+        }
+    }, [navigate, getUserData]);
 
     return(
         <div>
@@ -21,6 +39,12 @@ const Dashboard = () => {
                 {showModalConnections && ReactDOM.createPortal(
                     <ModalConnections onClose={() => {setShowModalConnections(false)}} />,
                     document.body
+                )}
+
+                {userData && userData.connections.length > 0 && (
+                    userData.connections.map((connection, index) => (
+                        <ConnectionCard key={index} connection={connection} setUserData={setUserData} />
+                    ))
                 )}
             </div>
             <div className='titleDiv'>

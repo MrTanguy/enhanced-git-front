@@ -1,8 +1,8 @@
 import '../styles/modal.css';
-import { UseAuth } from '../hooks/AuthProvider';
+import apiService from '../services/api/ApiService';
 
 export default function ModalConnections({ onClose }) {
-    const { getOAuthUrl } = UseAuth();
+    const { getOAuthUrl } = apiService();
 
     return (
         <div className="modalBackground" onClick={onClose}>
