@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import ReactDOM from "react-dom";
 import ModalConnections from '../components/ModalConnections';
 import ConnectionCard from '../components/ConnectionCard';
+import PortfolioCard from '../components/PortfolioCard';
 import { useNavigate } from 'react-router-dom';
 import apiService from '../services/api/ApiService';
 import '../styles/dashboard.css'
@@ -32,7 +33,7 @@ const Dashboard = () => {
                 <div className='titleDiv-underline'></div>
             </div>
             <div className='container'>
-                <div className='plusCard plusCardConnections' onClick={() => setShowModalConnections(true)} >
+                <div className='plusCard plusCardConnections' onClick={() => setShowModalConnections(true)}>
                     <img className='plusSvg' src="/plus.svg" alt='PlusSVG'/>
                 </div>
                 {/* Page modal pour choisir la connexion souhaitée */}
@@ -52,9 +53,15 @@ const Dashboard = () => {
                 <div className='titleDiv-underline'></div>
             </div>
             <div className='container'>
-                <div className='plusCard plusCardPortfolios' >
+                <div className='plusCard plusCardPortfolios' onClick={() => console.log("hihi")}>
                     <img className='plusSvg' src="/plus.svg" alt='PlusSVG'/>
                 </div>
+
+                {userData && userData.portfolios.length > 0 && (
+                    userData.portfolios.map((portfolio, index) => (
+                        <PortfolioCard key={index} portfolio={portfolio} />
+                    ))
+                )}
             </div>
         </div>    
     )  
