@@ -77,11 +77,53 @@ const apiService = () => {
 
     }
 
+    const createPortfolio = async (setUserData) => {
+        try {
+            const response = await apiFetch(`${apiUrl}/portfolio/create`, {
+                method: "GET"
+            }, bearerToken, refresh);
+    
+            if (!response.ok) {
+                throw new Error(`Erreur ${response.status}: ${await response.text()}`);
+            }
+    
+            const data = await response.json();
+    
+            setUserData(prevData => ({
+                ...prevData,
+                portfolios: prevData.portfolios ? [...prevData.portfolios, data] : [data] // Évite erreur si `portfolios` est undefined
+            }));
+    
+        } catch (error) {
+            console.error("Erreur :", error);
+        }
+    };
+
+    const getPotfolioData = async (portfolioUuid) => {
+        try {
+            const response = await apiFetch(`${apiUrl}/portfolio/${portfolioUuid}`, {
+                method: "GET"
+            });
+
+            if (!response.ok) {
+                throw new Error(`Erreur ${response.status}: ${await response.text()}`);
+            }
+
+            return await response.json()
+
+        } catch (error) {
+            console.error("Erreur :", error);
+        }
+    }
+    
+
     return {
         getOAuthUrl,
         sendAccessToken,
         getUserData,
-        deleteConnection
+        deleteConnection,
+        createPortfolio,
+        getPotfolioData
     };
 };
 
