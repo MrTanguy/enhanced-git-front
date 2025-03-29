@@ -1,31 +1,41 @@
-import { useParams } from 'react-router-dom';
-import apiService from '../services/api/ApiService';
-import { useEffect, useRef } from 'react';
+import { useParams } from "react-router-dom";
+import apiService from "../services/api/ApiService";
+import { useEffect, useState } from "react";
+import '../styles/portfolio.css'
 
-
-
-const Portfolio = () =>  {
-    const isEffectExecuted = useRef(false); 
+const Portfolio = () => {
     const { portfolioUuid } = useParams();
-    const { getPotfolioData } = apiService();
+    const [portfolioData, setPortfolioData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+    const { getPortfolioData } = apiService();
 
     useEffect(() => {
-        if (!isEffectExecuted.current) {
-            isEffectExecuted.current = true; 
-            getPotfolioData(portfolioUuid)
-            .then(data => console.log(data))
-            .catch(error => {
-                console.error("Erreur lors de la récupération des données du portfolio :", error);
+        setLoading(true);
+        setError(null);
+
+        getPortfolioData(portfolioUuid)
+            .then(data => {
+                setPortfolioData(data);
+                setLoading(false);
             })
-        }
-    })
+            .catch(err => {
+                console.error("Erreur lors de la récupération du portfolio :", err);
+                setError("Impossible de charger le portfolio.");
+                setLoading(false);
+            });
+    }, [portfolioUuid]);
+
+    if (loading) return <div className="loader"></div>;;
+    if (error) return <p style={{ color: "red" }}>{error}</p>;
 
     return (
         <div>
-            hehe
+            <h1>{portfolioData?.title}</h1>
+            <p>{portfolioData?.description}</p>
         </div>
-    )
+    );
+};
 
-}
-
-export default Portfolio
+export default Portfolio;

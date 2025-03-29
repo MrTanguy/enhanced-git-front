@@ -99,7 +99,7 @@ const apiService = () => {
         }
     };
 
-    const getPotfolioData = async (portfolioUuid) => {
+    const getPortfolioData = async (portfolioUuid) => {
         try {
             const response = await apiFetch(`${apiUrl}/portfolio/${portfolioUuid}`, {
                 method: "GET"
@@ -123,7 +123,7 @@ const apiService = () => {
         getUserData,
         deleteConnection,
         createPortfolio,
-        getPotfolioData
+        getPortfolioData
     };
 };
 
