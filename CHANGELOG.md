@@ -20,6 +20,20 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [0.3.0] - 31-03-2025
+
+#### Changed 
+- `/dashboard` => Button to create a portfolio, get all datas about potfolio
+
+### Added
+- `/:portfolioUuid` => Display a portfolio
+
+### Featured 
+- PortfolioCard is a component to display a Portfolio
+- New functions to call backend routes in ApiService
+
+---
+
 ## [0.2.0] - 03-02-2025
 
 ### Changed 
