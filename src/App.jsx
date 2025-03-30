@@ -18,7 +18,7 @@ function App() {
           {/* Route publique */}
           <Route path='/login' element={<Login />}></Route>
           <Route path='/register' element={<Register />}></Route>
-          <Route path='/:portfolioUuid' element={<Portfolio />} />
+          <Route path='/:portfolioUuid' element={<Portfolio />}></Route>
 
           {/* Route protégées */}
           <Route path='/dashboard' element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>}></Route>
