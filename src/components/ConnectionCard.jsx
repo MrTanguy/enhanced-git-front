@@ -4,7 +4,7 @@ const ConnectionCard = ({ connection, setUserData }) => {
     const { deleteConnection } = apiService();
 
     const handleDelete = async (e) => {
-        e.stopPropagation(); // Évite d'exécuter handleRedirect lors du clic sur le bouton supprimer
+        e.stopPropagation();
         try {
             await deleteConnection(connection.id);
             setUserData(prevData => ({
@@ -42,7 +42,7 @@ const ConnectionCard = ({ connection, setUserData }) => {
     return (
         <div className='plusCard plusCardConnections' onClick={handleRedirect}>
             <button className="deleteButton" onClick={handleDelete}>
-                <img src="/cross.svg" alt="Supprimer" className="deleteIcon" />
+                <img src="/cross.svg" alt="Delete" className="deleteIcon" />
             </button>
             <img className='connectionSvg' src={getIconPath(connection.website)} alt={connection.website} />
             <p className='titleCard'>{connection.username}</p>

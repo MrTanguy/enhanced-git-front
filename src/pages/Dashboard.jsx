@@ -56,7 +56,7 @@ const Dashboard = () => {
                 </div>
                 {userData && userData.portfolios.length > 0 && (
                     userData.portfolios.map((portfolio, index) => (
-                        <PortfolioCard key={index} portfolio={portfolio} />
+                        <PortfolioCard key={index} portfolio={portfolio} setUserData={setUserData} />
                     ))
                 )}
             </div>

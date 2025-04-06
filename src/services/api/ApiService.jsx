@@ -1,5 +1,6 @@
 import { UseAuth } from "../../hooks/AuthProvider";
 import apiFetch from "./apiFetch";
+import ToastCustom from "../../components/ToastCustom";
 
 const apiService = () => {
     const { bearerToken, refresh } = UseAuth();
@@ -67,7 +68,7 @@ const apiService = () => {
             }, bearerToken, refresh)
 
             if (!response.ok) {
-                throw new Error(`Erreur ${response.status}: ${await response.text()}`);
+                throw new Error(`Error ${response.status}: ${await response.text()}`);
             }
 
             console.log("Connexion supprimée avec succès !");
@@ -79,15 +80,20 @@ const apiService = () => {
 
     const createPortfolio = async (setUserData) => {
         try {
+            const loadingTeast = ToastCustom("Creating a portfolio...", "loading")
+
             const response = await apiFetch(`${apiUrl}/portfolio/create`, {
                 method: "GET"
             }, bearerToken, refresh);
     
             if (!response.ok) {
+                ToastCustom("An error occured...", "error", loadingTeast)
                 throw new Error(`Erreur ${response.status}: ${await response.text()}`);
             }
     
             const data = await response.json();
+
+            ToastCustom("Portfolio created !", "success", loadingTeast)
     
             setUserData(prevData => ({
                 ...prevData,
@@ -95,7 +101,8 @@ const apiService = () => {
             }));
     
         } catch (error) {
-            console.error("Erreur :", error);
+            ToastCustom("Failed to create a portfolio", "error", loadingTeast)
+            console.error("Error :", error);
         }
     };
 
@@ -115,6 +122,32 @@ const apiService = () => {
             console.error("Erreur :", error);
         }
     }
+
+    const deletePortfolio = async (portfolio, setUserData) => {
+        try {
+            const loadingTeast = ToastCustom("Deleting portfolio...", "loading")
+
+            const response = await apiFetch(`${apiUrl}/portfolio/${portfolio.uuid}`, {
+                method: "DELETE"
+            }, bearerToken, refresh )
+
+            if (!response.ok) {
+                ToastCustom("An error occured...", "error", loadingTeast)
+                throw new Error(`Erreur ${response.status}: ${await response.text()}`);
+            }
+
+            setUserData(prevData => ({
+                ...prevData,
+                portfolios: prevData.portfolios.filter(item => item.uuid !== portfolio.uuid)
+            }));
+            ToastCustom("Portfolio deleted !", "success", loadingTeast)
+
+
+
+        } catch (error) {
+            console.error("Erreur :", error)
+        }
+    }
     
 
     return {
@@ -123,7 +156,8 @@ const apiService = () => {
         getUserData,
         deleteConnection,
         createPortfolio,
-        getPortfolioData
+        getPortfolioData,
+        deletePortfolio
     };
 };
 
