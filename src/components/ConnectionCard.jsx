@@ -6,11 +6,7 @@ const ConnectionCard = ({ connection, setUserData }) => {
     const handleDelete = async (e) => {
         e.stopPropagation();
         try {
-            await deleteConnection(connection.id);
-            setUserData(prevData => ({
-                ...prevData,
-                connections: prevData.connections.filter(conn => conn.id !== connection.id)
-            }));
+            await deleteConnection(connection.id, setUserData);
         } catch (error) {
             console.error("Erreur lors de la suppression :", error);
         }

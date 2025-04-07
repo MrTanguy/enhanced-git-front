@@ -16,14 +16,16 @@ const apiService = () => {
                 const data = await response.json();
                 window.location.href = data;
             }
+            throw new Error()
         } catch (error) {
             console.error("Error :", error);
+            ToastCustom("Failed to connect...", "error", loadingTeast)
         }
     };
 
     const sendAccessToken = async (code, website) => {
         try {
-
+            const loadingTeast = ToastCustom(`Connection to ${website}...`, "loading")
             const formData = new URLSearchParams();
             formData.append("code", code);
             formData.append("website", website)
@@ -37,11 +39,15 @@ const apiService = () => {
             }, bearerToken, refresh);
 
             if (response.ok) {
+                ToastCustom("Successfully connected !", "success", loadingTeast)
                 const data = await response.json();
                 return data
             }
+            
+            throw new Error()
         } catch (error) {
             console.error("Error :", error);
+            ToastCustom("Connection failed...", "error", loadingTeast)
         }
     }
 
@@ -56,12 +62,15 @@ const apiService = () => {
                 return await response.json()
             }
 
+            throw new Error()
         } catch (error) {
             console.error("Error :", error)
+            ToastCustom("Failed to get data...", "error")
         }
     }
 
-    const deleteConnection = async (id) => {
+    const deleteConnection = async (id, setUserData) => {
+        const loadingTeast = ToastCustom(`Deleting connection...`, "loading")
         try {
             const response = await apiFetch(`${apiUrl}/connect/delete/${id}`, {
                 method: "DELETE"
@@ -71,9 +80,15 @@ const apiService = () => {
                 throw new Error(`Error ${response.status}: ${await response.text()}`);
             }
 
-            console.log("Connexion supprimée avec succès !");
+            setUserData(prevData => ({
+                ...prevData,
+                connections: prevData.connections.filter(conn => conn.id !== connection.id)
+            }));
+
+            ToastCustom("Connection deleted !", "success", loadingTeast)
         } catch (error) {
             console.error("Error :", error)
+            ToastCustom("Failed to delete connection...", "error", loadingTeast)
         }
 
     }
@@ -141,8 +156,6 @@ const apiService = () => {
                 portfolios: prevData.portfolios.filter(item => item.uuid !== portfolio.uuid)
             }));
             ToastCustom("Portfolio deleted !", "success", loadingTeast)
-
-
 
         } catch (error) {
             console.error("Erreur :", error)
