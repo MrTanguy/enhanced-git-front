@@ -14,7 +14,11 @@ const PortfolioCard = ({ portfolio, setUserData }) => {
         window.open(`/${portfolio.uuid}`, '_blank');
     };
 
-    const copyToClopboard = () => {
+    const edit = () => {
+        window.open(`/${portfolio.uuid}/edit`, "_self");
+    }
+
+    const copyToClipboard = () => {
         navigator.clipboard.writeText(`https://localhost:5173/${portfolio.uuid}`);
         ToastCustom("URL copied in the clipboard !", "success");
     };
@@ -32,8 +36,8 @@ const PortfolioCard = ({ portfolio, setUserData }) => {
             <div className="titleCard">{portfolio.title}</div>
             <div className="cardButtons">
                 <button className="cardButton" onClick={openInNewTab}><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></button>
-                <button className="cardButton"><FontAwesomeIcon icon={faPen} /></button>
-                <button className="cardButton" onClick={copyToClopboard}><FontAwesomeIcon icon={faShareFromSquare} /></button>
+                <button className="cardButton"onClick={edit}><FontAwesomeIcon icon={faPen} /></button>
+                <button className="cardButton" onClick={copyToClipboard}><FontAwesomeIcon icon={faShareFromSquare} /></button>
             </div>
 
             {showModalDeletePortfolio && ReactDOM.createPortal(

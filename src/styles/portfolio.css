@@ -12,3 +12,45 @@
         transform: rotate(360deg);
     }
 }
+
+.sidebarcontainer {
+    position: absolute;
+    left: 0;
+    height: calc(100vh - 70px);
+    display: flex;
+    z-index: 10;
+}
+
+.sidebar {
+    transition: width 0.3s ease;
+    overflow: hidden;
+    background-color: #F7F1F2;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+}
+
+.sidebar.expanded {
+    width: 10vw;
+    padding: 1rem;
+}
+
+.sidebar.collapsed {
+    width: 0;
+    padding: 0;
+}
+
+.sidebarbutton {
+    background: #F7F1F2;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 30px;
+    height: 50px;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
