@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import Square from './Square';
+import Title from './Title';
 
-const Droppable = ({ id, items }) => {
-  const { setNodeRef } = useDroppable({ id });
+export default function Portfolio({ items, onItemUpdate }) {
+  const { setNodeRef } = useDroppable({ id: 'droppable' });
 
   const style = {
     width: "80vw",
@@ -17,22 +18,17 @@ const Droppable = ({ id, items }) => {
   return (
     <div ref={setNodeRef} style={style}>
       {items.map((item, index) => {
-        if (item.type === 'text') {
-          return <Square key={index} item={item} id={index} />;
-        } else if (item.type === 'image') {
-          return <img key={index} alt="placeholder" />;
-        } else {
-          return <span key={index}>❓ Inconnu</span>;
+        switch (item.type) {
+          case 'title':
+            return <Title key={index} item={item} id={index} onUpdate={onItemUpdate} />;
+          case 'text':
+            return <Square key={index} item={item} id={index} />;
+          case 'image':
+            return <img key={index} alt="placeholder" />;
+          default:
+            return <span key={index}>❓ Inconnu</span>;
         }
       })}
-    </div>
-  );
-};
-
-export default function Portfolio({ items }) {
-  return (
-    <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <Droppable id="droppable" items={items} />
     </div>
   );
 }

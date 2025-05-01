@@ -17,7 +17,7 @@ export default function ModalConnections({ onClose }) {
                         <div className="siteName">GitLab</div>
                     </div>
                 </div>
-                <button className="closeButton" onClick={onClose}>
+                <button className="button" onClick={onClose}>
                     Close
                 </button>
             </div>

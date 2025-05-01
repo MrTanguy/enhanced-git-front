@@ -68,7 +68,7 @@
     color: #333;
 }
 
-.closeButton {
+.button {
     margin-top: 20px;
     padding: 10px 25px;
     background-color: #739BF2;
@@ -80,7 +80,7 @@
     transition: background-color 0.2s ease;
 }
 
-.closeButton:hover {
+.button:hover {
     background-color: #567acb;
 }
 

@@ -49,6 +49,8 @@ const EditPortfolio = () => {
         setListItems(updated);
       }
     }
+
+    console.log(listItems)
   };
 
   return (
@@ -64,7 +66,13 @@ const EditPortfolio = () => {
           position: "relative",
         }}
       >
-        <Portfolio items={listItems} />
+        <Portfolio items={listItems} onItemUpdate={(index, updates) => {
+          setListItems(prev => {
+            const updated = [...prev];
+            updated[index] = { ...updated[index], ...updates };
+            return updated;
+          });
+        }} />
       </div>
     </DndContext>
   );

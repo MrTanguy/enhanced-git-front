@@ -54,3 +54,23 @@
     justify-content: center;
     align-items: center;
 }
+
+.draggableTitle {
+    position: absolute;
+    border: 1px solid #000;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: move;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 1;
+    transform: translate3d(0, 0, 0);
+}
+.draggableTitle.dragging {
+    z-index: 10;
+}
