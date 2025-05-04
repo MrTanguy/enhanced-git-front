@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { DndContext } from "@dnd-kit/core";
-import Sidebar from "../components/dndkitEditPortfolio/Sidebar";
-import Portfolio from "../components/dndkitEditPortfolio/Portfolio";
+import Sidebar from "../components/dndkitPortfolio/Sidebar";
+import Portfolio from "../components/dndkitPortfolio/Portfolio";
 
 const EditPortfolio = () => {
   const [listItems, setListItems] = useState([]);
