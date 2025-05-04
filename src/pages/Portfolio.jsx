@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import apiService from "../services/api/ApiService";
 import { useEffect, useState } from "react";
 import '../styles/portfolio.css'
+import DisplayPortfolio from "../components/dndkitPortfolio/DisplayPortfolio";
 
 const Portfolio = () => {
     const { portfolioUuid } = useParams();
@@ -17,7 +18,7 @@ const Portfolio = () => {
 
         getPortfolioData(portfolioUuid)
             .then(data => {
-                setPortfolioData(data);
+                setPortfolioData(data.content);
                 setLoading(false);
             })
             .catch(err => {
@@ -31,11 +32,20 @@ const Portfolio = () => {
     if (error) return <p style={{ color: "red" }}>{error}</p>;
 
     return (
-        <div>
-            <h1>{portfolioData?.title}</h1>
-            <p>{portfolioData?.description}</p>
+        <div
+          style={{
+            height: "calc(100vh - 70px)",
+            width: "100vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "relative",
+          }}
+        >
+          <DisplayPortfolio items={portfolioData} isEditable={false} />
         </div>
-    );
+      );
+      
 };
 
 export default Portfolio;

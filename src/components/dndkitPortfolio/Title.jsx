@@ -1,9 +1,9 @@
 import { useDraggable } from '@dnd-kit/core';
 import ReactDOM from 'react-dom';
-import '../../styles/modal.css'; // pour appliquer les mêmes styles
+import '../../styles/modal.css';
 import { useState } from 'react';
 
-export default function Title({ item, id, onUpdate }) {
+export default function Title({ item, id, onUpdate, isEditable }) {
   const {
     attributes,
     listeners,
@@ -15,7 +15,7 @@ export default function Title({ item, id, onUpdate }) {
   });
 
   const [showModal, setShowModal] = useState(false);
-  const [title, setTitle] = useState(item.text || 'Title');
+  const [title, setTitle] = useState(item.title || 'Title');
   const [newTitle, setNewTitle] = useState(title)
   
   const className=`draggableTitle ${isDragging ? 'dragging' : ''}`
@@ -25,21 +25,17 @@ export default function Title({ item, id, onUpdate }) {
     transform: transform
       ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
       : 'translate3d(0, 0, 0)',
-  }
-
-  const handleDoubleClick = () => {
-    setShowModal(true);
   };
 
   const handleSave = () => {
-    onUpdate(id, { 'tile': newTitle });
+    onUpdate(id, { 'title': newTitle });
     setTitle(newTitle)
     setShowModal(false);
   };
 
   return (
     <>
-      <div ref={setNodeRef} className={className} style={style} {...attributes} {...listeners} onDoubleClick={handleDoubleClick}>
+      <div ref={setNodeRef} className={className} style={style} {...attributes} {...listeners} onDoubleClick={isEditable ? () => setShowModal(true) : undefined}>
         {title}
       </div>
       {showModal && ReactDOM.createPortal(

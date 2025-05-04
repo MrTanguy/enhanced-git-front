@@ -3,7 +3,7 @@ import { useDroppable } from '@dnd-kit/core';
 import Square from './Square';
 import Title from './Title';
 
-export default function Portfolio({ items, onItemUpdate }) {
+export default function DisplayPortfolio({ items, onItemUpdate, isEditable }) {
   const { setNodeRef } = useDroppable({ id: 'droppable' });
 
   const style = {
@@ -20,7 +20,7 @@ export default function Portfolio({ items, onItemUpdate }) {
       {items.map((item, index) => {
         switch (item.type) {
           case 'title':
-            return <Title key={index} item={item} id={index} onUpdate={onItemUpdate} />;
+            return <Title key={index} item={item} id={index} onUpdate={onItemUpdate} isEditable={isEditable}/>;
           case 'text':
             return <Square key={index} item={item} id={index} />;
           case 'image':

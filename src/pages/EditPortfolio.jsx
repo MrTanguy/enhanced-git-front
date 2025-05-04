@@ -1,13 +1,38 @@
-import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { DndContext } from "@dnd-kit/core";
+import apiService from "../services/api/ApiService";
 import Sidebar from "../components/dndkitPortfolio/Sidebar";
-import Portfolio from "../components/dndkitPortfolio/Portfolio";
+import DisplayPortfolio from "../components/dndkitPortfolio/DisplayPortfolio";
 
 const EditPortfolio = () => {
+  const { portfolioUuid } = useParams();
   const [listItems, setListItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const { getPortfolioData } = apiService();
+
+  useEffect(() => {
+      setLoading(true);
+      setError(null);
+
+      getPortfolioData(portfolioUuid)
+          .then(data => {
+            setListItems(data.content);
+            setLoading(false);
+          })
+          .catch(err => {
+              console.error("Erreur lors de la récupération du portfolio :", err);
+              setError("Impossible de charger le portfolio.");
+              setLoading(false);
+          });
+  }, [portfolioUuid]);
+
+  if (loading) return <div className="loader"></div>;;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   const gridSize = 10;
-
   const snapToGridModifier = ({ transform, active, over }) => {
     if (over?.id === "droppable") {
       return {
@@ -49,8 +74,6 @@ const EditPortfolio = () => {
         setListItems(updated);
       }
     }
-
-    console.log(listItems)
   };
 
   return (
@@ -66,7 +89,7 @@ const EditPortfolio = () => {
           position: "relative",
         }}
       >
-        <Portfolio items={listItems} onItemUpdate={(index, updates) => {
+        <DisplayPortfolio items={listItems} isEditable={true} onItemUpdate={(index, updates) => {
           setListItems(prev => {
             const updated = [...prev];
             updated[index] = { ...updated[index], ...updates };
