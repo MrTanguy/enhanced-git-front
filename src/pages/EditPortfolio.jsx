@@ -4,6 +4,7 @@ import { DndContext } from "@dnd-kit/core";
 import apiService from "../services/api/ApiService";
 import Sidebar from "../components/dndkitPortfolio/Sidebar";
 import DisplayPortfolio from "../components/dndkitPortfolio/DisplayPortfolio";
+import Toolbar from "../components/dndkitPortfolio/Toolbar";
 
 const EditPortfolio = () => {
   const { portfolioUuid } = useParams();
@@ -97,6 +98,7 @@ const EditPortfolio = () => {
           });
         }} />
       </div>
+      <Toolbar />
     </DndContext>
   );
 };
