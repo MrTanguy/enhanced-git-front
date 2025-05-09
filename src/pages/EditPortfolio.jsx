@@ -9,6 +9,7 @@ import Toolbar from "../components/dndkitPortfolio/Toolbar";
 const EditPortfolio = () => {
   const { portfolioUuid } = useParams();
   const [listItems, setListItems] = useState([]);
+  const [title, setTitle] = useState()
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -21,6 +22,7 @@ const EditPortfolio = () => {
       getPortfolioData(portfolioUuid)
           .then(data => {
             setListItems(data.content);
+            setTitle(data.title)
             setLoading(false);
           })
           .catch(err => {
@@ -77,6 +79,14 @@ const EditPortfolio = () => {
     }
   };
 
+  const UpdateItems  = (index, updates) => {
+    setListItems(prev => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], ...updates };
+      return updated;
+    });
+  }
+
   return (
     <DndContext onDragEnd={handleDragEnd} modifiers={[snapToGridModifier]}>
       <Sidebar />
@@ -90,15 +100,9 @@ const EditPortfolio = () => {
           position: "relative",
         }}
       >
-        <DisplayPortfolio items={listItems} isEditable={true} onItemUpdate={(index, updates) => {
-          setListItems(prev => {
-            const updated = [...prev];
-            updated[index] = { ...updated[index], ...updates };
-            return updated;
-          });
-        }} />
+        <DisplayPortfolio items={listItems} isEditable={true} onItemUpdate={UpdateItems} />
       </div>
-      <Toolbar />
+      <Toolbar portfolioUuid={portfolioUuid} items={listItems} title={title} setTitle={setTitle}/>
     </DndContext>
   );
 };

@@ -138,6 +138,29 @@ const apiService = () => {
         }
     }
 
+    const updatePortfolio = async(portfolioUuid, portfolioData) => {
+        try {
+            const loadingTeast = ToastCustom("Saving portfolio...", "loading")
+
+            const response = await apiFetch(`${apiUrl}/portfolio/${portfolioUuid}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(portfolioData),
+            }, bearerToken, refresh)
+
+            if (!response.ok) {
+                ToastCustom("An error occured...", "error", loadingTeast)
+                throw new Error(`Erreur ${response.status}: ${await response.text()}`);
+            }
+
+            ToastCustom("Portfolio saved !", "success", loadingTeast)
+        }  catch (error) {
+            console.error("Erreur :", error)
+        }
+    }
+
     const deletePortfolio = async (portfolio, setUserData) => {
         try {
             const loadingTeast = ToastCustom("Deleting portfolio...", "loading")
@@ -170,6 +193,7 @@ const apiService = () => {
         deleteConnection,
         createPortfolio,
         getPortfolioData,
+        updatePortfolio,
         deletePortfolio
     };
 };
