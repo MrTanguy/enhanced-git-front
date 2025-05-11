@@ -7,7 +7,7 @@ import '../../styles/portfolio.css';
 import apiService from "../../services/api/ApiService";
 
 
-const Toolbar = ({portfolioUuid, items, title, setTitle, isUpdated}) => {
+const Toolbar = ({portfolioUuid, items, title, setTitle, isUpdated, onSaveSuccess}) => {
     const [showModal, setShowModal] = useState(false)
     const [isVisible, setIsVisible] = useState(true);
     const [newTitle, setNewTitle] = useState(title)
@@ -19,14 +19,17 @@ const Toolbar = ({portfolioUuid, items, title, setTitle, isUpdated}) => {
 
     const handleSave = () => {
         const data = {
-            "title": title,
-            "content": items
-        }
+            title: title,
+            content: items
+        };
         updatePortfolio(portfolioUuid, data)
+        .then(() => {
+            onSaveSuccess();
+        })
         .catch(err => {
-            console.error("Erreur lors de la récupération du portfolio :", err);
+            console.error("Erreur lors de la sauvegarde du portfolio :", err);
         });
-    }
+    };
 
     const handleRename = () => {
         setTitle(newTitle)

@@ -116,6 +116,14 @@ const EditPortfolio = () => {
     checkIfUpdated(listItems, newTitle);
   };
 
+  const handleSaveSuccess = () => {
+    const deepCopy = JSON.parse(JSON.stringify(listItems));
+    setOldListItems(deepCopy);
+    setOldTitle(title);
+    setIsUpdated(false);
+  };
+
+
   return (
     <DndContext onDragEnd={handleDragEnd} modifiers={[snapToGridModifier]}>
       <Sidebar />
@@ -141,6 +149,7 @@ const EditPortfolio = () => {
         title={title}
         setTitle={UpdateTitle}
         isUpdated={isUpdated}
+        onSaveSuccess={handleSaveSuccess}
       />
     </DndContext>
   );
