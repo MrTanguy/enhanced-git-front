@@ -8,31 +8,46 @@ import Toolbar from "../components/dndkitPortfolio/Toolbar";
 
 const EditPortfolio = () => {
   const { portfolioUuid } = useParams();
+
   const [listItems, setListItems] = useState([]);
-  const [title, setTitle] = useState()
+  const [oldListItems, setOldListItems] = useState([]);
+  const [title, setTitle] = useState();
+  const [oldTitle, setOldTitle] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isUpdated, setIsUpdated] = useState(false);
 
   const { getPortfolioData } = apiService();
 
-  useEffect(() => {
-      setLoading(true);
-      setError(null);
+  const checkIfUpdated = (newItems = listItems, newTitle = title) => {
+    const listChanged = JSON.stringify(newItems) !== JSON.stringify(oldListItems);
+    const titleChanged = newTitle !== oldTitle;
+    setIsUpdated(listChanged || titleChanged);
+  };
 
-      getPortfolioData(portfolioUuid)
-          .then(data => {
-            setListItems(data.content);
-            setTitle(data.title)
-            setLoading(false);
-          })
-          .catch(err => {
-              console.error("Erreur lors de la récupération du portfolio :", err);
-              setError("Impossible de charger le portfolio.");
-              setLoading(false);
-          });
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+
+    getPortfolioData(portfolioUuid)
+      .then(data => {
+        const deepCopyContent = JSON.parse(JSON.stringify(data.content));
+        const deepCopyTitle = JSON.parse(JSON.stringify(data.title));
+
+        setOldListItems(deepCopyContent);
+        setListItems(deepCopyContent);
+        setOldTitle(deepCopyTitle);
+        setTitle(deepCopyTitle);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Erreur lors de la récupération du portfolio :", err);
+        setError("Impossible de charger le portfolio.");
+        setLoading(false);
+      });
   }, [portfolioUuid]);
 
-  if (loading) return <div className="loader"></div>;;
+  if (loading) return <div className="loader"></div>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   const gridSize = 10;
@@ -47,9 +62,17 @@ const EditPortfolio = () => {
     return transform;
   };
 
+  const UpdateItems = (index, updates) => {
+    setListItems(prev => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], ...updates };
+      checkIfUpdated(updated);
+      return updated;
+    });
+  };
+
   const handleDragEnd = (e) => {
     const { active, over } = e;
-
     if (!over || over.id !== "droppable") return;
 
     const draggableRect = active.rect.current.translated;
@@ -66,26 +89,32 @@ const EditPortfolio = () => {
     if (id.startsWith("draggable-")) {
       const type = active.data.current?.type;
       const newItem = { type, x: snappedX, y: snappedY };
-      setListItems((prev) => [...prev, newItem]);
+
+      setListItems(prev => {
+        const updated = [...prev, newItem];
+        checkIfUpdated(updated);
+        return updated;
+      });
     } else if (id.startsWith("item-")) {
       const index = parseInt(id.split("-")[1]);
-      const updated = [...listItems];
-      const current = updated[index];
+      setListItems(prev => {
+        const updated = [...prev];
+        const current = updated[index];
 
-      if (current.x !== snappedX || current.y !== snappedY) {
-        updated[index] = { ...current, x: snappedX, y: snappedY };
-        setListItems(updated);
-      }
+        if (current.x !== snappedX || current.y !== snappedY) {
+          updated[index] = { ...current, x: snappedX, y: snappedY };
+        }
+
+        checkIfUpdated(updated);
+        return updated;
+      });
     }
   };
 
-  const UpdateItems  = (index, updates) => {
-    setListItems(prev => {
-      const updated = [...prev];
-      updated[index] = { ...updated[index], ...updates };
-      return updated;
-    });
-  }
+  const UpdateTitle = (newTitle) => {
+    setTitle(newTitle);
+    checkIfUpdated(listItems, newTitle);
+  };
 
   return (
     <DndContext onDragEnd={handleDragEnd} modifiers={[snapToGridModifier]}>
@@ -100,9 +129,19 @@ const EditPortfolio = () => {
           position: "relative",
         }}
       >
-        <DisplayPortfolio items={listItems} isEditable={true} onItemUpdate={UpdateItems} />
+        <DisplayPortfolio
+          items={listItems}
+          isEditable={true}
+          onItemUpdate={UpdateItems}
+        />
       </div>
-      <Toolbar portfolioUuid={portfolioUuid} items={listItems} title={title} setTitle={setTitle}/>
+      <Toolbar
+        portfolioUuid={portfolioUuid}
+        items={listItems}
+        title={title}
+        setTitle={UpdateTitle}
+        isUpdated={isUpdated}
+      />
     </DndContext>
   );
 };

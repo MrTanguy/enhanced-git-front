@@ -7,7 +7,7 @@ import '../../styles/portfolio.css';
 import apiService from "../../services/api/ApiService";
 
 
-const Toolbar = ({portfolioUuid, items, title, setTitle}) => {
+const Toolbar = ({portfolioUuid, items, title, setTitle, isUpdated}) => {
     const [showModal, setShowModal] = useState(false)
     const [isVisible, setIsVisible] = useState(true);
     const [newTitle, setNewTitle] = useState(title)
@@ -41,7 +41,7 @@ const Toolbar = ({portfolioUuid, items, title, setTitle}) => {
                         <p>Toolbar</p>
                         <div>{title}</div>
                         <button className="button" onClick={() => {setShowModal(true)}}>Rename portfolio</button>
-                        <button className="button" onClick={handleSave}>Save</button>
+                        <button className={`button ${!isUpdated ? "disabled" : ""}`} onClick={handleSave} disabled={!isUpdated}>Save</button>
                     </div>
                 )}
             </div>

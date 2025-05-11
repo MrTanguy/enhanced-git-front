@@ -84,6 +84,12 @@
     background-color: #567acb;
 }
 
+.button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
 @keyframes fadeIn {
     from {
         opacity: 0;
