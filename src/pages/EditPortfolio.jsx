@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DndContext } from "@dnd-kit/core";
@@ -16,6 +17,7 @@ const EditPortfolio = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isUpdated, setIsUpdated] = useState(false);
+  const droppableRef = useRef(null);
 
   const { getPortfolioData } = apiService();
 
@@ -84,11 +86,18 @@ const EditPortfolio = () => {
     const snappedX = Math.round(rawX / gridSize) * gridSize;
     const snappedY = Math.round(rawY / gridSize) * gridSize;
 
+    const container = droppableRef.current;
+    if (!container) return;
+    const containerRect = container.getBoundingClientRect();
+
+    const xPercent = (snappedX / containerRect.width) * 100;
+    const yPercent = (snappedY / containerRect.height) * 100;
+
     const id = active.id;
 
     if (id.startsWith("draggable-")) {
       const type = active.data.current?.type;
-      const newItem = { type, x: snappedX, y: snappedY };
+      const newItem = { type, x: xPercent, y: yPercent };
 
       setListItems(prev => {
         const updated = [...prev, newItem];
@@ -101,8 +110,8 @@ const EditPortfolio = () => {
         const updated = [...prev];
         const current = updated[index];
 
-        if (current.x !== snappedX || current.y !== snappedY) {
-          updated[index] = { ...current, x: snappedX, y: snappedY };
+        if (current.x !== xPercent || current.y !== yPercent) {
+          updated[index] = { ...current, x: xPercent, y: yPercent };
         }
 
         checkIfUpdated(updated);
@@ -138,6 +147,7 @@ const EditPortfolio = () => {
         }}
       >
         <DisplayPortfolio
+          ref={droppableRef}
           items={listItems}
           isEditable={true}
           onItemUpdate={UpdateItems}

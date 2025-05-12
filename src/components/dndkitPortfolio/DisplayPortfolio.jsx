@@ -1,9 +1,9 @@
-import { useDroppable } from '@dnd-kit/core';
-import Square from './Square';
-import Title from './Title';
+import React, { forwardRef } from "react";
+import { useDroppable } from "@dnd-kit/core";
+import Title from "./Title";
 
-export default function DisplayPortfolio({ items, onItemUpdate, isEditable }) {
-  const { setNodeRef } = useDroppable({ id: 'droppable' });
+const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate }, ref) => {
+  const { setNodeRef } = useDroppable({ id: "droppable" });
 
   const style = {
     width: "80vw",
@@ -11,23 +11,41 @@ export default function DisplayPortfolio({ items, onItemUpdate, isEditable }) {
     border: "1px solid #A6A8AD",
     position: "relative",
     overflow: "hidden",
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+  };
+
+  // Fonction pour fusionner les deux refs
+  const combinedRef = (node) => {
+    setNodeRef(node);    // DndKit
+    if (ref) {
+      if (typeof ref === "function") {
+        ref(node);       // Si c’est une fonction
+      } else {
+        ref.current = node; // Sinon un ref classique
+      }
+    }
   };
 
   return (
-    <div ref={setNodeRef} style={style}>
+    <div ref={combinedRef} style={style}>
       {items.map((item, index) => {
         switch (item.type) {
-          case 'title':
-            return <Title key={index} item={item} id={index} onUpdate={onItemUpdate} isEditable={isEditable}/>;
-          case 'text':
-            return <Square key={index} item={item} id={index} />;
-          case 'image':
-            return <img key={index} alt="placeholder" />;
+          case "title":
+            return (
+              <Title
+                key={index}
+                item={item}
+                id={index}
+                onUpdate={onItemUpdate}
+                isEditable={isEditable}
+              />
+            );
           default:
             return <span key={index}>❓ Inconnu</span>;
         }
       })}
     </div>
   );
-}
+});
+
+export default DisplayPortfolio;

@@ -20,8 +20,8 @@ export default function Title({ item, id, onUpdate, isEditable }) {
   
   const className=`draggableTitle ${isDragging ? 'dragging' : ''}`
   const style={
-    top: item.y,
-    left: item.x,
+    top: `${item.y}%`,
+    left: `${item.x}%`,
     transform: transform
       ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
       : 'translate3d(0, 0, 0)',

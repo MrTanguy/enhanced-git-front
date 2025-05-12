@@ -16,9 +16,6 @@ const Sidebar = () => {
                 {isVisible && (
                     <div>
                         <p>Elements</p>
-                        <Draggable id="draggable-test" type="type">test</Draggable>
-                        <Draggable id="draggable-text" type="text">text</Draggable>
-                        <Draggable id="draggable-image" type="image">image</Draggable>
                         <Draggable id="draggable-title" type="title">Title</Draggable>
                     </div>
                 )}
