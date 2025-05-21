@@ -1,6 +1,6 @@
 import { useDraggable } from '@dnd-kit/core';
 import ReactDOM from 'react-dom';
-import '../../styles/modal.css';
+import '../../styles/portfolio/title.css';
 import { useState } from 'react';
 
 export default function Title({ item, id, onUpdate, isEditable }) {

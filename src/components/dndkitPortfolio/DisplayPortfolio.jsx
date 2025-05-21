@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import Title from "./Title";
+import Connection from "./Connection";
 
 const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate }, ref) => {
   const { setNodeRef } = useDroppable({ id: "droppable" });
@@ -14,14 +15,14 @@ const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate }, ref) =
     backgroundColor: "#fff",
   };
 
-  // Fonction pour fusionner les deux refs
+
   const combinedRef = (node) => {
-    setNodeRef(node);    // DndKit
+    setNodeRef(node);  
     if (ref) {
       if (typeof ref === "function") {
-        ref(node);       // Si c’est une fonction
+        ref(node);
       } else {
-        ref.current = node; // Sinon un ref classique
+        ref.current = node;
       }
     }
   };
@@ -40,6 +41,13 @@ const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate }, ref) =
                 isEditable={isEditable}
               />
             );
+          case "connection":
+            return (
+              <Connection 
+                key={index}
+                item={item}
+                id={index}/>
+            )
           default:
             return <span key={index}>❓ Inconnu</span>;
         }

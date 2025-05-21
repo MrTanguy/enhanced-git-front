@@ -118,6 +118,8 @@ const EditPortfolio = () => {
         return updated;
       });
     }
+
+    console.log(listItems)
   };
 
   const UpdateTitle = (newTitle) => {
