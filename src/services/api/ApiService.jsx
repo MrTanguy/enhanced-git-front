@@ -82,7 +82,7 @@ const apiService = () => {
 
             setUserData(prevData => ({
                 ...prevData,
-                connections: prevData.connections.filter(conn => conn.id !== connection.id)
+                connections: prevData.connections.filter(conn => conn.id !== id)
             }));
 
             ToastCustom("Connection deleted !", "success", loadingTeast)

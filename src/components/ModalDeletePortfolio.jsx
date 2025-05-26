@@ -25,8 +25,10 @@ const ModalDeletePortfolio = ({ setShowModalDeletePortfolio, onDelete }) => {
                 textAlign: "center"
             }}>
                 <p>Are you sure you want to delete this portfolio?</p>
-                <button className="modalButton" onClick={handleDelete}>Yes, delete</button>
-                <button className="modalButton" onClick={() => setShowModalDeletePortfolio(false)}>Close</button>
+                <div style={{ marginTop: 10, display: 'flex', justifyContent: 'center', gap: 8 }}>
+                    <button className="button" onClick={handleDelete}>Yes, delete</button>
+                    <button className="button" onClick={() => setShowModalDeletePortfolio(false)}>Close</button>
+                </div>
             </div>
         </div>
     );
