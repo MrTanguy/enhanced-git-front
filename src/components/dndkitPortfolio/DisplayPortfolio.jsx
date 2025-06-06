@@ -46,7 +46,9 @@ const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate }, ref) =
               <Connection 
                 key={index}
                 item={item}
-                id={index}/>
+                id={index}
+                isEditable={isEditable}
+              />
             )
           default:
             return <span key={index}>❓ Inconnu</span>;

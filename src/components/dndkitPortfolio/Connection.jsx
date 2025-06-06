@@ -1,7 +1,9 @@
 import { useDraggable } from '@dnd-kit/core';
+import ReactDOM from 'react-dom';
 import '../../styles/portfolio/connection.css';
+import { useState } from 'react';
 
-export default function Title({ item, id }) {
+export default function Title({ item, id, isEditable }) {
     const {
       attributes,
       listeners,
@@ -11,6 +13,8 @@ export default function Title({ item, id }) {
     } = useDraggable({
       id: `item-${id}`,
     });
+
+    const [showModal, setShowModal] = useState(false);
 
     const className=`draggableConnection ${isDragging ? 'dragging' : ''}`
     const style={
@@ -23,9 +27,17 @@ export default function Title({ item, id }) {
 
     return (
         <>
-            <div ref={setNodeRef} className={className} style={style} {...attributes} {...listeners}>
+            <div ref={setNodeRef} className={className} style={style} {...attributes} {...listeners} onDoubleClick={isEditable ? () => setShowModal(true) : undefined}>
                 a
             </div>
+            {showModal && ReactDOM.createPortal(
+              <div className="modalBackground" onClick={() => setShowModal(false)}>
+                <div className="modalDiv" onClick={(e) => e.stopPropagation()}>
+                  a
+                </div>
+              </div>,
+              document.body
+            )}
         </>
         
     )
