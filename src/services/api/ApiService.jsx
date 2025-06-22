@@ -51,23 +51,48 @@ const apiService = () => {
         }
     }
 
-    const getUserData = async () => {
+    const getUserData = async (connections = true, portfolios = true) => {
+        const selectedTypes = [];
+
+        if (connections) selectedTypes.push("connections");
+        if (portfolios) selectedTypes.push("portfolios");
+
+        const args = selectedTypes.length > 0 ? `?types=${selectedTypes.join(",")}` : "";
 
         try {
-            const response = await apiFetch(`${apiUrl}/user/data`, {
+            const response = await apiFetch(`${apiUrl}/user/data${args}`, {
+                method: "GET"
+            }, bearerToken, refresh);
+
+            if (response.ok) {
+                return await response.json();
+            }
+
+            throw new Error();
+        } catch (error) {
+            console.error("Error:", error);
+            ToastCustom("Failed to get data...", "error");
+        }
+    };
+
+    const getAllPublicProjects = async (connection) => {
+
+        const args = `?account_id=${connection.id}&website=${connection.website}`
+
+        try {
+            const response = await apiFetch(`${apiUrl}/connect/projects${args}`, {
                 method: "GET"
             }, bearerToken, refresh)
 
             if (response.ok) {
                 return await response.json()
             }
-
-            throw new Error()
         } catch (error) {
-            console.error("Error :", error)
-            ToastCustom("Failed to get data...", "error")
+            console.error("Error:", error);
+            ToastCustom("Failed to get data...", "error");
         }
     }
+
 
     const deleteConnection = async (id, setUserData) => {
         const loadingTeast = ToastCustom(`Deleting connection...`, "loading")
@@ -190,6 +215,7 @@ const apiService = () => {
         getOAuthUrl,
         sendAccessToken,
         getUserData,
+        getAllPublicProjects,
         deleteConnection,
         createPortfolio,
         getPortfolioData,

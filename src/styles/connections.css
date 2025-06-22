@@ -56,4 +56,26 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     transition: box-shadow 0.3s ease;
   }
-  
+
+  .svgImage {
+    height: 40px;
+  }
+
+  .modalChoice {
+    border: 2px solid #739BF2;
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    align-items: center;      
+    justify-content: center;   
+    gap: 10px;                 
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .modalGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px;
+    justify-items: center; 
+  }
