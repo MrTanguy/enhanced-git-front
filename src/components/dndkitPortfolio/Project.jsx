@@ -20,6 +20,7 @@ export default function Project({ item, id, isEditable, onUpdate }) {
 
   const [showModal, setShowModal] = useState(false);
   const [project, setProject] = useState(item.project)
+  const [newProject, setNewProject] = useState(item.project)
   const [connections, setConnections] = useState();
   const [projects, setProjects] = useState();
   const [changeProjectStep, setChangeProjectStep] = useState(null)
@@ -34,7 +35,8 @@ export default function Project({ item, id, isEditable, onUpdate }) {
   };
 
   const handleSave = () => {
-    onUpdate(id, {'project': project});
+    setProject(newProject)
+    onUpdate(id, {'project': newProject});
     setShowModal(false);
     setChangeProjectStep(null)
   };
@@ -52,7 +54,7 @@ export default function Project({ item, id, isEditable, onUpdate }) {
   }
 
   const handleProjectSelection = async (_project) => {
-    setProject(_project)
+    setNewProject(_project)
     setChangeProjectStep(null)
   }
 
@@ -63,6 +65,13 @@ export default function Project({ item, id, isEditable, onUpdate }) {
       setConnections(data.connections);
     }
     setChangeProjectStep("connection")
+  };
+
+  const handleRedirect = () => {
+    const link = project.link;
+    if (link) {
+      window.open(link, "_blank");
+    }
   };
 
   const getIconPath = (website) => {
@@ -78,7 +87,7 @@ export default function Project({ item, id, isEditable, onUpdate }) {
 
   return (
     <>
-      <div ref={setNodeRef} className={className} style={style} {...attributes} {...listeners} onDoubleClick={isEditable ? () => setShowModal(true) : undefined}>
+      <div ref={setNodeRef} className={className} style={style} {...attributes} {...listeners} onDoubleClick={isEditable ? () => setShowModal(true) : handleRedirect}>
         {project?.name ? project.name : "No selected project"}
       </div>
       {showModal && ReactDOM.createPortal(
@@ -93,7 +102,7 @@ export default function Project({ item, id, isEditable, onUpdate }) {
             {/* Affiche le projet (si sélectionné)  */}
             {changeProjectStep === null && (
               <div>
-                {project ? project.name : "No selected project"}
+                {newProject ? newProject.name : "No selected project"}
               </div>
             )}
             {/* Affiche les connections */}
