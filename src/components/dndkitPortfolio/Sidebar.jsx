@@ -18,6 +18,7 @@ const Sidebar = () => {
                         <p>Elements</p>
                         <Draggable id="draggable-title" type="title">Title</Draggable>
                         <Draggable id="draggable-connection" type="connection">Connection</Draggable>
+                        <Draggable id="draggable-text" type="text">Text</Draggable>
                     </div>
                 )}
             </div>

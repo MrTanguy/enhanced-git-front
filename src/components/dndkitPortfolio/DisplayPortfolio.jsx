@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import Title from "./Title";
 import Project from "./Project";
+import Text from "./Text";
 
 const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate }, ref) => {
   const { setNodeRef } = useDroppable({ id: "droppable" });
@@ -43,6 +44,16 @@ const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate }, ref) =
           case "connection":
             return (
               <Project 
+                key={index}
+                item={item}
+                id={index}
+                onUpdate={onItemUpdate}
+                isEditable={isEditable}
+              />
+            )
+          case "text":
+            return (
+              <Text
                 key={index}
                 item={item}
                 id={index}

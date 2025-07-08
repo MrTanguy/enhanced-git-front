@@ -88,6 +88,7 @@ export default function Project({ item, id, isEditable, onUpdate }) {
   return (
     <>
       <div ref={setNodeRef} className={className} style={style} {...attributes} {...listeners} onDoubleClick={isEditable ? () => setShowModal(true) : handleRedirect}>
+        <img className='svgImage' src={getIconPath(project?.website)} alt={project?.website} />
         {project?.name ? project.name : "No selected project"}
       </div>
       {showModal && ReactDOM.createPortal(
