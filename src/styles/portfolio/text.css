@@ -1,0 +1,135 @@
+.draggableText {
+  position: absolute;
+  background: white;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-sizing: border-box;
+  width: fit-content; 
+  min-width: 320px;        
+  max-width: 70vw;          
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  cursor: grab;
+  overflow: visible;
+}
+
+.editorModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.editorContent {
+  background: white;
+  padding: 1.5rem;
+  width: 95%;
+  max-width: 800px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.editorMenu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.editorMenu button,
+.editorMenu select {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.editorMenu button:hover,
+.editorMenu select:hover {
+  background-color: #e0e0e0;
+}
+
+.editorMenu .active {
+  background-color: #d0cfff;
+  border-color: #958DF1;
+  color: #333;
+}
+
+.editorBody {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 6px;
+  background: #fafafa;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.tiptap-editor {
+  min-height: 150px;
+}
+
+.editorFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.editorFooter button {
+  padding: 8px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.editorFooter .cancel {
+  background-color: #739BF2;
+  color: white;
+}
+
+.editorFooter .cancel:hover {
+  background-color: #5a7ec7;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.editorFooter .save {
+  background-color: #739BF2;
+  color: white;
+}
+
+.editorFooter .save:hover {
+  background-color: #5a7ec7;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Code block */
+pre {
+  background: #2e2b29;
+  color: #f8f8f2;
+  font-family: 'JetBrainsMono', monospace;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+code {
+  font-family: 'JetBrainsMono', monospace;
+}
+
+p {
+  margin: 0;
+}
