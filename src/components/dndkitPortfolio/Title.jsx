@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import '../../styles/portfolio/title.css';
 import { useState } from 'react';
 
-export default function Title({ item, id, onUpdate, isEditable }) {
+export default function Title({ item, id, onUpdate, onDelete, isEditable }) {
   const {
     attributes,
     listeners,
@@ -33,6 +33,11 @@ export default function Title({ item, id, onUpdate, isEditable }) {
     setShowModal(false);
   };
 
+  const handleDelete = () => {
+    onDelete(id)
+    setShowModal(false)
+  }
+
   return (
     <>
       <div ref={setNodeRef} className={className} style={style} {...attributes} {...listeners} onDoubleClick={isEditable ? () => setShowModal(true) : undefined}>
@@ -46,9 +51,16 @@ export default function Title({ item, id, onUpdate, isEditable }) {
               onChange={e => setNewTitle(e.target.value)}
               style={{ width: '100%', padding: '8px', fontSize: '16px', boxSizing: 'border-box' }}
             />
-            <div style={{ marginTop: 10, display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
-              <button className="button" onClick={handleSave}>Save</button>
-              <button className="button" onClick={() => setShowModal(false)}>Cancel</button>
+
+            <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <button className="button" style={{ backgroundColor: '#f44336', color: 'white' }} onClick={handleDelete} >
+                Delete
+              </button>
+
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button className="button" onClick={handleSave}>Save</button>
+                <button className="button" onClick={() => setShowModal(false)}>Cancel</button>
+              </div>
             </div>
           </div>
         </div>,

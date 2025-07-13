@@ -5,7 +5,7 @@ import '../../styles/portfolio/connection.css';
 import { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 
-export default function Project({ item, id, isEditable, onUpdate }) {
+export default function Project({ item, id, isEditable, onUpdate, onDelete }) {
   const {
     attributes,
     listeners,
@@ -44,6 +44,11 @@ export default function Project({ item, id, isEditable, onUpdate }) {
   const handleCancel = () => {
     setShowModal(false)
     setChangeProjectStep(null)
+  }
+
+  const handleDelete = () => {
+    onDelete(id)
+    setShowModal(false)
   }
 
   const handleConnectionSelection = async (connection) => {
@@ -131,10 +136,17 @@ export default function Project({ item, id, isEditable, onUpdate }) {
                 )}
               </div>
             }
-            <div style={{ marginTop: 10, display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
-              <button className="button" onClick={getConnections}>Change project</button>
-              <button className="button" onClick={handleSave}>Save</button>
-              <button className="button" onClick={handleCancel}>Cancel</button>
+
+            <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <button className="button" style={{ backgroundColor: '#f44336', color: 'white' }} onClick={handleDelete} >
+                Delete
+              </button>
+
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button className="button" onClick={getConnections}>Change project</button>
+                <button className="button" onClick={handleSave}>Save</button>
+                <button className="button" onClick={handleCancel}>Cancel</button>
+              </div>
             </div>
           </div>
         </div>,

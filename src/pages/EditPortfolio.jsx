@@ -73,6 +73,14 @@ const EditPortfolio = () => {
     });
   };
 
+  const handleDeleteItem = (index) => {
+    setListItems(prev => {
+      const updated = prev.filter((_, i) => i !== index);
+      checkIfUpdated(updated);
+      return updated;
+    });
+  };
+
   const handleDragEnd = (e) => {
     const { active, over } = e;
     if (!over || over.id !== "droppable") return;
@@ -151,6 +159,7 @@ const EditPortfolio = () => {
           items={listItems}
           isEditable={true}
           onItemUpdate={UpdateItems}
+          onItemDelete={handleDeleteItem}
         />
       </div>
       <Toolbar

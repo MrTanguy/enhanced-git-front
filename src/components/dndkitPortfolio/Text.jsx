@@ -54,7 +54,7 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-export default function Text({ item, id, isEditable, onUpdate }) {
+export default function Text({ item, id, isEditable, onUpdate, onDelete }) {
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id: `item-${id}` });
   const [showModal, setShowModal] = useState(false);
   const [content, setContent] = useState(item.content || '<p>Double click to edit</p>');
@@ -78,6 +78,11 @@ export default function Text({ item, id, isEditable, onUpdate }) {
     setShowModal(false);
   };
 
+  const handleDelete = () => {
+    onDelete(id)
+    setShowModal(false)
+  }
+
   return (
     <>
       <div
@@ -97,9 +102,15 @@ export default function Text({ item, id, isEditable, onUpdate }) {
             <div className="editorBody">
               <EditorContent editor={editor} className="tiptap-editor" />
             </div>
-            <div className="editorFooter">
-              <button className="cancel" onClick={() => setShowModal(false)}>Annuler</button>
-              <button className="save" onClick={handleSave}>Enregistrer</button>
+            <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <button className="button" style={{ backgroundColor: '#f44336', color: 'white' }} onClick={handleDelete} >
+                Delete
+              </button>
+
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button className="button" onClick={handleSave}>Save</button>
+                <button className="button" onClick={() => setShowModal(false)}>Cancel</button>
+              </div>
             </div>
           </div>
         </div>,

@@ -4,7 +4,7 @@ import Title from "./Title";
 import Project from "./Project";
 import Text from "./Text";
 
-const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate }, ref) => {
+const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate, onItemDelete }, ref) => {
   const { setNodeRef } = useDroppable({ id: "droppable" });
 
   const style = {
@@ -38,6 +38,7 @@ const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate }, ref) =
                 item={item}
                 id={index}
                 onUpdate={onItemUpdate}
+                onDelete={onItemDelete}
                 isEditable={isEditable}
               />
             );
@@ -48,6 +49,7 @@ const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate }, ref) =
                 item={item}
                 id={index}
                 onUpdate={onItemUpdate}
+                onDelete={onItemDelete}
                 isEditable={isEditable}
               />
             )
@@ -58,6 +60,7 @@ const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate }, ref) =
                 item={item}
                 id={index}
                 onUpdate={onItemUpdate}
+                onDelete={onItemDelete}
                 isEditable={isEditable}
               />
             )
