@@ -80,7 +80,7 @@ export default function Project({ item, id, isEditable, onUpdate, onDelete }) {
   };
 
   const getIconPath = (website) => {
-    switch (website.toLowerCase()) {
+    switch (website) {
       case 'github':
           return '/github.svg';
       case 'gitlab':
@@ -92,8 +92,8 @@ export default function Project({ item, id, isEditable, onUpdate, onDelete }) {
 
   return (
     <>
-      <div ref={setNodeRef} className={className} style={style} {...attributes} {...listeners} onDoubleClick={isEditable ? () => setShowModal(true) : handleRedirect}>
-        <img className='svgImage' src={getIconPath(project?.website)} alt={project?.website} />
+      <div data-testid="project-div" ref={setNodeRef} className={className} style={style} {...attributes} {...listeners} onDoubleClick={isEditable ? () => setShowModal(true) : handleRedirect}>
+        {project?.name ? <img className='svgImage' src={getIconPath(project?.website)} alt={project?.website} /> : null}
         {project?.name ? project.name : "No selected project"}
       </div>
       {showModal && ReactDOM.createPortal(
@@ -101,7 +101,7 @@ export default function Project({ item, id, isEditable, onUpdate, onDelete }) {
           <div className="modalDiv" onClick={(e) => e.stopPropagation()}>
             {/* Loader */}
             {changeProjectStep === "loading" && 
-              <div>
+              <div data-testid="loader">
                 <ClipLoader color="#739BF2" size={50} speedMultiplier={0.7} />
               </div>
             }

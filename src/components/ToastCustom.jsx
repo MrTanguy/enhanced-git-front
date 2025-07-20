@@ -12,10 +12,10 @@ const ToastCustom = (message, type = "success", toastId = null) => {
     };
 
     if (type === "loading") {
-        return toast.loading(message, options); // Retourne l'ID du toast de chargement
+        return toast.loading(message, options);
     }
     if (toastId) {
-        return toast[type](message, { ...options, id: toastId }); // Mise à jour d'un toast existant
+        return toast[type](message, { ...options, id: toastId });
     }
     return toast[type](message, options);
 };

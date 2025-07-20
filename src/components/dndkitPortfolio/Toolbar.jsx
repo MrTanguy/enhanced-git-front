@@ -54,7 +54,7 @@ const Toolbar = ({portfolioUuid, items, title, setTitle, isUpdated, onSaveSucces
             </button>
             {showModal && ReactDOM.createPortal(
                 <div className="modalBackground" onClick={() => setShowModal(false)}>
-                    <div className="modalDiv" onClick={(e) => e.stopPropagation()}>
+                    <div className="modalDiv" role="dialog" onClick={(e) => e.stopPropagation()}>
                         <input
                             value={newTitle}
                             onChange={e => setNewTitle(e.target.value)}

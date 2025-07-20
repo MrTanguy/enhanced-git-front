@@ -7,6 +7,7 @@ const apiService = () => {
     const apiUrl = import.meta.env.VITE_API_URL;
 
     const getOAuthUrl = async (website) => {
+        const loadingToast = ToastCustom(`Connection to ${website}...`, "loading")
         try {
             const response = await apiFetch(`${apiUrl}/connect/url?website=${website}`, {
                 method: "GET",
@@ -15,17 +16,18 @@ const apiService = () => {
             if (response.ok) {
                 const data = await response.json();
                 window.location.href = data;
+                return
             }
             throw new Error()
         } catch (error) {
             console.error("Error :", error);
-            ToastCustom("Failed to connect...", "error", loadingTeast)
+            ToastCustom("Failed to connect...", "error", loadingToast)
         }
     };
 
     const sendAccessToken = async (code, website) => {
+        const loadingToast = ToastCustom(`Connection to ${website}...`, "loading")
         try {
-            const loadingTeast = ToastCustom(`Connection to ${website}...`, "loading")
             const formData = new URLSearchParams();
             formData.append("code", code);
             formData.append("website", website)
@@ -39,7 +41,7 @@ const apiService = () => {
             }, bearerToken, refresh);
 
             if (response.ok) {
-                ToastCustom("Successfully connected !", "success", loadingTeast)
+                ToastCustom("Successfully connected !", "success", loadingToast)
                 const data = await response.json();
                 return data
             }
@@ -47,7 +49,7 @@ const apiService = () => {
             throw new Error()
         } catch (error) {
             console.error("Error :", error);
-            ToastCustom("Connection failed...", "error", loadingTeast)
+            ToastCustom("Connection failed...", "error", loadingToast)
         }
     }
 
@@ -95,7 +97,7 @@ const apiService = () => {
 
 
     const deleteConnection = async (id, setUserData) => {
-        const loadingTeast = ToastCustom(`Deleting connection...`, "loading")
+        const loadingToast = ToastCustom(`Deleting connection...`, "loading")
         try {
             const response = await apiFetch(`${apiUrl}/connect/delete/${id}`, {
                 method: "DELETE"
@@ -110,30 +112,30 @@ const apiService = () => {
                 connections: prevData.connections.filter(conn => conn.id !== id)
             }));
 
-            ToastCustom("Connection deleted !", "success", loadingTeast)
+            ToastCustom("Connection deleted !", "success", loadingToast)
         } catch (error) {
             console.error("Error :", error)
-            ToastCustom("Failed to delete connection...", "error", loadingTeast)
+            ToastCustom("Failed to delete connection...", "error", loadingToast)
         }
 
     }
 
     const createPortfolio = async (setUserData) => {
-        try {
-            const loadingTeast = ToastCustom("Creating a portfolio...", "loading")
+        const loadingToast = ToastCustom("Creating a portfolio...", "loading")
 
+        try {
             const response = await apiFetch(`${apiUrl}/portfolio/create`, {
                 method: "GET"
             }, bearerToken, refresh);
     
             if (!response.ok) {
-                ToastCustom("An error occured...", "error", loadingTeast)
+                ToastCustom("An error occured...", "error", loadingToast)
                 throw new Error(`Erreur ${response.status}: ${await response.text()}`);
             }
     
             const data = await response.json();
 
-            ToastCustom("Portfolio created !", "success", loadingTeast)
+            ToastCustom("Portfolio created !", "success", loadingToast)
     
             setUserData(prevData => ({
                 ...prevData,
@@ -141,7 +143,7 @@ const apiService = () => {
             }));
     
         } catch (error) {
-            ToastCustom("Failed to create a portfolio", "error", loadingTeast)
+            ToastCustom("Failed to create a portfolio", "error", loadingToast)
             console.error("Error :", error);
         }
     };
@@ -165,7 +167,7 @@ const apiService = () => {
 
     const updatePortfolio = async(portfolioUuid, portfolioData) => {
         try {
-            const loadingTeast = ToastCustom("Saving portfolio...", "loading")
+            const loadingToast = ToastCustom("Saving portfolio...", "loading")
 
             const response = await apiFetch(`${apiUrl}/portfolio/${portfolioUuid}`, {
                 method: "PATCH",
@@ -176,11 +178,11 @@ const apiService = () => {
             }, bearerToken, refresh)
 
             if (!response.ok) {
-                ToastCustom("An error occured...", "error", loadingTeast)
+                ToastCustom("An error occured...", "error", loadingToast)
                 throw new Error(`Erreur ${response.status}: ${await response.text()}`);
             }
 
-            ToastCustom("Portfolio saved !", "success", loadingTeast)
+            ToastCustom("Portfolio saved !", "success", loadingToast)
         }  catch (error) {
             console.error("Erreur :", error)
         }
@@ -188,14 +190,14 @@ const apiService = () => {
 
     const deletePortfolio = async (portfolio, setUserData) => {
         try {
-            const loadingTeast = ToastCustom("Deleting portfolio...", "loading")
+            const loadingToast = ToastCustom("Deleting portfolio...", "loading")
 
             const response = await apiFetch(`${apiUrl}/portfolio/${portfolio.uuid}`, {
                 method: "DELETE"
             }, bearerToken, refresh )
 
             if (!response.ok) {
-                ToastCustom("An error occured...", "error", loadingTeast)
+                ToastCustom("An error occured...", "error", loadingToast)
                 throw new Error(`Erreur ${response.status}: ${await response.text()}`);
             }
 
@@ -203,7 +205,7 @@ const apiService = () => {
                 ...prevData,
                 portfolios: prevData.portfolios.filter(item => item.uuid !== portfolio.uuid)
             }));
-            ToastCustom("Portfolio deleted !", "success", loadingTeast)
+            ToastCustom("Portfolio deleted !", "success", loadingToast)
 
         } catch (error) {
             console.error("Erreur :", error)

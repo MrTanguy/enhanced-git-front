@@ -44,7 +44,7 @@ export default function Title({ item, id, onUpdate, onDelete, isEditable }) {
         {title}
       </div>
       {showModal && ReactDOM.createPortal(
-        <div className="modalBackground" onClick={() => setShowModal(false)}>
+        <div className="modalBackground" data-testid="modal-background" onClick={() => setShowModal(false)}>
           <div className="modalDiv" onClick={(e) => e.stopPropagation()}>
             <input
               value={newTitle}
