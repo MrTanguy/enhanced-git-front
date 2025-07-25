@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { UseAuth } from '../hooks/AuthProvider';
 import { useNavigate } from 'react-router-dom';
-import '../styles/connections.css';
+import '../styles/login.css';
 
 const LoginForm = () => {
   const { login } = UseAuth();
@@ -14,65 +14,77 @@ const LoginForm = () => {
     event.preventDefault();
 
     try {
-      await login(email, password)
-      navigate("/dashboard")
+      await login(email, password);
+      navigate("/dashboard");
     } catch (err) {
-      setErrorMessage(err.message)
+      setErrorMessage(err.message);
     }
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "90vh" }}>
-      <div style={{ width: "60%", height: "70%", backgroundColor: "#F7F1F2", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-        <div style={{ height: "100%", width: "65%", border: "5px solid #739BF2", borderRight: 0, boxSizing: "border-box", display: "flex", justifyContent: "center"}}>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", width: "50%" }}>
-            <div style={{ fontSize: "2vw", marginBottom: "20px", color: "#4A81F8" }}>Login</div>
-            <form onSubmit={handleSubmit} style={{ width: "100%" }}>
-              <div style={{ marginBottom: "2%" }}>
-                <input 
-                  type="email" 
-                  value={email} 
-                  onChange={(e) => setEmail(e.target.value)} 
-                  required 
+    <div className="login-wrapper">
+      <div className="login-container">
+        <div className="login-left">
+          <div className="login-form-wrapper">
+            <div className="login-title">Login</div>
+            <form onSubmit={handleSubmit} aria-label="Login form">
+              <div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                   placeholder="Email"
-                  className='input'
+                  className="input"
+                  aria-label="Email address"
                 />
               </div>
-              <div style={{ marginBottom: "2%" }}>
-                <input 
-                  type="password" 
-                  value={password} 
-                  onChange={(e) => setPassword(e.target.value)} 
-                  required 
+              <div>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                   placeholder="Password"
-                  className='input'
+                  className="input"
+                  aria-label="Password"
                 />
               </div>
-              {errorMessage && <p style={{ color: 'red', fontSize: '1.2vw' }}>{errorMessage}</p>}
+              {errorMessage && (
+                <p style={{ color: 'red', fontSize: '1.2vw' }}>{errorMessage}</p>
+              )}
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <button 
-                  type="submit" 
-                  className='submitButton'>
+                <button
+                  type="submit"
+                  className="submit-button"
+                  aria-label="Submit login form"
+                >
                   Login
                 </button>
               </div>
             </form>
           </div>
         </div>
-        <div style={{ height: "100%", width: "35%", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column"}}>
-          <img src="/loginimage.svg" style={{ width: "100%", height: "100%", objectFit: "fill" }} alt='LoginSVG'/>
-          <div style={{ position: "absolute", color: "#F7F1F2", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-            <div style={{ fontSize: "1.2vw" }}>
-            New here ?
-            </div>
-            <a className='swapLoginButton' onClick={() => navigate("/register") }>
-            Register
+        <div className="login-right">
+          <img
+            src="/loginimage.svg"
+            className="login-image"
+            alt="Illustration de connexion"
+          />
+          <div className="register-overlay">
+            <div className="register-overlay-text">New here ?</div>
+            <a
+              className="swap-login-button"
+              onClick={() => navigate("/register")}
+              aria-label="Register link"
+            >
+              Register
             </a>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default LoginForm;

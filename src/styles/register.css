@@ -1,0 +1,129 @@
+/*
+  Couleurs :
+  bleu foncé : #4A81F8
+  bleu : #739BF2
+  bleu clair : #A8C0F3
+  gris foncé : #404040
+  gris : #A6A8AD
+  gris clair : #F7F1F2
+*/
+
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.register-container {
+  width: 60%;
+  height: 70%;
+  background-color: #F7F1F2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.register-left {
+  height: 100%;
+  width: 65%;
+  border: 5px solid #739BF2;
+  border-right: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.register-form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+}
+
+.register-title {
+  font-size: 2vw;
+  margin-bottom: 20px;
+  color: #4A81F8;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #739BF2;
+  font-size: 0.8vw;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+  margin-top: 5%;
+}
+
+.submitButton {
+  width: 60%;
+  padding: 10px;
+  background-color: #739BF2;
+  color: #F7F1F2;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2vw;
+  box-sizing: border-box;
+  margin-top: 10%;
+}
+
+.submitButton:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+.submitButton:disabled {
+  background-color: #cccccc;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.register-right {
+  height: 100%;
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.register-image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.register-overlay {
+  position: absolute;
+  color: #F7F1F2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.register-overlay-text {
+  font-size: 1.2vw;
+}
+
+.swapLoginButton {
+  border-radius: 10px;
+  background-color: #F7F1F2;
+  color: #4A81F8;
+  padding: 10px;
+  font-size: 1vw;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.swapLoginButton:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease;
+}

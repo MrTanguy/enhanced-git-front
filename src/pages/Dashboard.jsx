@@ -19,13 +19,25 @@ const Dashboard = () => {
             getUserData()
             .then(data => setUserData(data))
             .catch(error => {
-                console.error("Erreur lors de la récupération des données utilisateur :", error);
+                console.error("An error occured :", error);
             });
         }
     }, [getUserData]);
 
+    const handleLogout = () => {
+        localStorage.removeItem('bearerToken');
+
+        window.location.href = '/login';
+    }
+
     return(
         <div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px 20px' }}>
+                <button onClick={handleLogout} style={{ cursor: 'pointer', padding: '6px 12px', fontSize: '14px' }}>
+                    Logout
+                </button>
+            </div>
+
             <div className='titleDiv'>
                 <div className='titleDiv-font'>Connexions</div>
                 <div className='titleDiv-underline'></div>
