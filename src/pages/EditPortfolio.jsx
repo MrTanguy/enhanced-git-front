@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DndContext } from "@dnd-kit/core";
@@ -19,7 +19,9 @@ const EditPortfolio = () => {
   const [isUpdated, setIsUpdated] = useState(false);
   const droppableRef = useRef(null);
 
-  const { getPortfolioData } = apiService();
+  const api = useMemo(() => apiService(), []);
+
+  const { getPortfolioData } = api;
 
   const checkIfUpdated = (newItems = listItems, newTitle = title) => {
     const listChanged = JSON.stringify(newItems) !== JSON.stringify(oldListItems);
@@ -47,13 +49,13 @@ const EditPortfolio = () => {
         setError("Impossible de charger le portfolio.");
         setLoading(false);
       });
-  }, [portfolioUuid]);
+  }, [portfolioUuid, getPortfolioData]);
 
   if (loading) return <div className="loader"></div>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   const gridSize = 10;
-  const snapToGridModifier = ({ transform, active, over }) => {
+  const snapToGridModifier = ({ transform, over }) => {
     if (over?.id === "droppable") {
       return {
         ...transform,

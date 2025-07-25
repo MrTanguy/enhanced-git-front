@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import apiService from "../services/api/ApiService";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import '../styles/portfolio.css'
 import DisplayPortfolio from "../components/dndkitPortfolio/DisplayPortfolio";
 
@@ -9,8 +9,8 @@ const Portfolio = () => {
     const [portfolioData, setPortfolioData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
-    const { getPortfolioData } = apiService();
+
+    const { getPortfolioData } = useMemo(() => apiService(), []);
 
     useEffect(() => {
         setLoading(true);
@@ -18,7 +18,7 @@ const Portfolio = () => {
 
         getPortfolioData(portfolioUuid)
             .then(data => {
-                setPortfolioData(data.content);
+                setPortfolioData(data?.content || null);
                 setLoading(false);
             })
             .catch(err => {
@@ -26,9 +26,9 @@ const Portfolio = () => {
                 setError("Impossible de charger le portfolio.");
                 setLoading(false);
             });
-    }, [portfolioUuid]);
+    }, [portfolioUuid, getPortfolioData]);
 
-    if (loading) return <div className="loader"></div>;;
+    if (loading) return <div className="loader"></div>;
     if (error) return <p style={{ color: "red" }}>{error}</p>;
 
     return (
@@ -45,7 +45,6 @@ const Portfolio = () => {
           <DisplayPortfolio items={portfolioData} isEditable={false} />
         </div>
       );
-      
 };
 
 export default Portfolio;

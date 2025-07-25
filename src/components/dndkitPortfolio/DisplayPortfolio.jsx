@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import Title from "./Title";
 import Project from "./Project";
@@ -71,5 +71,7 @@ const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate, onItemDe
     </div>
   );
 });
+
+DisplayPortfolio.displayName = "DisplayPortfolio";
 
 export default DisplayPortfolio;

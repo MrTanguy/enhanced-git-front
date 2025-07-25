@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 
 export default function Draggable({ id, type, children }) {

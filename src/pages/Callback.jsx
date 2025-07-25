@@ -9,18 +9,18 @@ const Callback = () => {
 
     useEffect(() => {
         if (!isEffectExecuted.current) {
-            isEffectExecuted.current = true; 
+            isEffectExecuted.current = true;
 
             const params = new URLSearchParams(window.location.search);
             const code = params.get('code');
             const site = params.get('site');
 
             if (code) {
-                sendAccessToken(code, site)
-                navigate('/dashboard')
+                sendAccessToken(code, site);
+                navigate('/dashboard');
             }
         }
-    }, [navigate]);
+    }, [navigate, sendAccessToken]);
 
     return <div>Traitement en cours...</div>;
 };
