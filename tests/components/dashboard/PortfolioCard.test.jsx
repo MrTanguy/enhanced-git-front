@@ -1,18 +1,18 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
-import PortfolioCard from '../../src/components/PortfolioCard';
+import PortfolioCard from '../../../src/components/dashboard/PortfolioCard';
 import ReactDOM from 'react-dom';
 
 // Mock API service
 const mockDeletePortfolio = vi.fn();
-vi.mock('../../src/services/api/ApiService', () => ({
+vi.mock('../../../src/services/api/ApiService', () => ({
   default: () => ({
     deletePortfolio: mockDeletePortfolio,
   }),
 }));
 
 // Mock Toast
-vi.mock('../../src/components/ToastCustom', () => ({
+vi.mock('../../../src/components/ToastCustom', () => ({
   __esModule: true,
   default: vi.fn(),
 }));

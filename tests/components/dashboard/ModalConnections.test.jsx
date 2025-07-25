@@ -1,11 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
-import ModalConnections from '../../src/components/ModalConnections';
+import ModalConnections from '../../../src/components/dashboard/ModalConnections';
 
 // Mock de la fonction getOAuthUrl
 const mockGetOAuthUrl = vi.fn();
 
-vi.mock('../../src/services/api/ApiService', () => {
+vi.mock('../../../src/services/api/ApiService', () => {
   return {
     default: () => ({
       getOAuthUrl: mockGetOAuthUrl,

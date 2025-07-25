@@ -13,7 +13,7 @@ vi.mock('../../src/hooks/AuthProvider', () => ({
 const mockDeleteConnection = vi.fn(async (id, setUserData) => {
   if (setUserData) setUserData(null);
 });
-vi.mock('../../src/services/api/ApiService', () => {
+vi.mock('../../../src/services/api/ApiService', () => {
   return {
     default: () => ({
       deleteConnection: mockDeleteConnection,
@@ -21,7 +21,7 @@ vi.mock('../../src/services/api/ApiService', () => {
   };
 });
 
-import ConnectionCard from '../../src/components/ConnectionCard';
+import ConnectionCard from '../../../src/components/dashboard/ConnectionCard';
 
 describe('ConnectionCard component', () => {
   const mockSetUserData = vi.fn();

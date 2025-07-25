@@ -1,5 +1,5 @@
-import '../styles/modal.css';
-import apiService from '../services/api/ApiService';
+import '../../styles/modal.css';
+import apiService from '../../services/api/ApiService';
 
 export default function ModalConnections({ onClose }) {
     const { getOAuthUrl } = apiService();

@@ -1,10 +1,10 @@
 import ReactDOM from "react-dom";
 import { useState } from "react";
-import ToastCustom from "./ToastCustom";
+import ToastCustom from "../ToastCustom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faArrowUpRightFromSquare, faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
 import ModalDeletePortfolio from "./ModalDeletePortfolio";
-import apiService from "../services/api/ApiService";
+import apiService from "../../services/api/ApiService";
 
 const PortfolioCard = ({ portfolio, setUserData }) => {
     const [showModalDeletePortfolio, setShowModalDeletePortfolio] = useState(false);

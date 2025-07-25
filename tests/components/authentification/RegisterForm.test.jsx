@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
-import RegisterForm from '../../src/components/authentification/RegisterForm';
+import RegisterForm from '../../../src/components/authentification/RegisterForm';
 import { MemoryRouter } from 'react-router-dom';
 
 // Mock de useNavigate de react-router-dom
@@ -15,7 +15,7 @@ vi.mock('react-router-dom', async () => {
 
 // Mock du hook UseAuth
 const mockRegister = vi.fn();
-vi.mock('../../src/hooks/AuthProvider', () => ({
+vi.mock('../../../src/hooks/AuthProvider', () => ({
   UseAuth: () => ({
     register: mockRegister,
   }),

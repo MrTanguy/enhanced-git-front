@@ -1,4 +1,4 @@
-import '../styles/modal.css';
+import '../../styles/modal.css';
 
 const ModalDeletePortfolio = ({ setShowModalDeletePortfolio, onDelete }) => {
     const handleDelete = () => {

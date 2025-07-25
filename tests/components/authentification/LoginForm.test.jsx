@@ -1,10 +1,10 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
-import LoginForm from '../../src/components/authentification/LoginForm';
+import LoginForm from '../../../src/components/authentification/LoginForm';
 
 const mockLogin = vi.fn();
 
-vi.mock('../../src/hooks/AuthProvider', () => ({
+vi.mock('../../../src/hooks/AuthProvider', () => ({
   UseAuth: () => ({
     bearerToken: 'mock-token',
     refresh: vi.fn(),

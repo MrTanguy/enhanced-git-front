@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import ReactDOM from "react-dom";
 import ModalConnections from '../components/ModalConnections';
-import ConnectionCard from '../components/ConnectionCard';
-import PortfolioCard from '../components/PortfolioCard';
+import ConnectionCard from '../components/dashboard/ConnectionCard';
+import PortfolioCard from '../components/dashboard/PortfolioCard';
 import apiService from '../services/api/ApiService';
 import '../styles/dashboard.css'
 

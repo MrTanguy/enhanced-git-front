@@ -1,4 +1,4 @@
-import apiService from '../services/api/ApiService';
+import apiService from '../../services/api/ApiService';
 
 const ConnectionCard = ({ connection, setUserData }) => {
     const { deleteConnection } = apiService();

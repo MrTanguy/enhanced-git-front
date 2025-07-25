@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
-import ModalDeletePortfolio from '../../src/components/ModalDeletePortfolio';
+import ModalDeletePortfolio from '../../../src/components/dashboard/ModalDeletePortfolio';
 
 describe('ModalDeletePortfolio component', () => {
   const mockOnDelete = vi.fn();
