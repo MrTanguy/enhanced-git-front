@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
-import LoginForm from '../../src/components/LoginForm';
+import LoginForm from '../../src/components/authentification/LoginForm';
 
 const mockLogin = vi.fn();
 

@@ -24,7 +24,7 @@ const Home = () => {
           <div className="feature-box">
             <div className="feature-icon">🚀</div>
             <h3>Ready to deploy</h3>
-            <p>Share your portfolio, or keep it private — it's your choice.</p>
+            <p>Share your portfolio, or keep it private — it&apos;s your choice.</p>
           </div>
         </div>
 

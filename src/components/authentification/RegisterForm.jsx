@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UseAuth } from '../hooks/AuthProvider';
-import '../styles/register.css'; // ← importe le nouveau fichier CSS
+import { UseAuth } from '../../hooks/AuthProvider';
+import '../../styles/register.css';
 
 function RegisterForm() {
     const navigate = useNavigate();
