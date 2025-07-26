@@ -52,17 +52,18 @@ describe('ConnectionCard component', () => {
     // Github
     const { rerender } = render(<ConnectionCard connection={connectionGithub} setUserData={mockSetUserData} />);
     expect(screen.getByText('testuser')).toBeInTheDocument();
-    expect(screen.getByAltText('github')).toHaveAttribute('src', '/github.svg');
+    expect(screen.getByAltText(/github logo/i)).toHaveAttribute('src', '/github.svg');
 
     // GitLab
     rerender(<ConnectionCard connection={connectionGitlab} setUserData={mockSetUserData} />);
     expect(screen.getByText('testuser')).toBeInTheDocument();
-    expect(screen.getByAltText('gitlab')).toHaveAttribute('src', '/gitlab.svg');
+    expect(screen.getByAltText(/gitlab logo/i)).toHaveAttribute('src', '/gitlab.svg');
   });
 
   test('shows default icon if website unknown', () => {
     render(<ConnectionCard connection={connectionUnknown} setUserData={mockSetUserData} />);
-    expect(screen.getByAltText('unknownsite')).toHaveAttribute('src', '/default.svg');
+    const img = screen.getByAltText(/unknownsite/i);
+    expect(img).toHaveAttribute('src', '/default.svg');
   });
 
   test('opens a new tab to the GitHub profile when clicking the card', () => {
@@ -89,7 +90,9 @@ describe('ConnectionCard component', () => {
     render(<ConnectionCard connection={connectionGithub} setUserData={mockSetUserData} />);
     const openSpy = vi.spyOn(window, 'open').mockImplementation(() => {});
 
-    const deleteButton = screen.getByRole('button');
+    const deleteButton = screen.getByRole('button', {
+      name: /delete.*connection/i
+    });
     fireEvent.click(deleteButton);
 
     expect(openSpy).not.toHaveBeenCalled();
@@ -98,7 +101,10 @@ describe('ConnectionCard component', () => {
 
   test('calls deleteConnection with correct ID and setUserData function', async () => {
     render(<ConnectionCard connection={connectionGithub} setUserData={mockSetUserData} />);
-    const deleteButton = screen.getByRole('button');
+    const deleteButton = screen.getByRole('button', {
+      name: /delete.*connection/i
+    });
+    fireEvent.click(deleteButton);
     await fireEvent.click(deleteButton);
 
     expect(mockDeleteConnection).toHaveBeenCalledWith(connectionGithub.id, mockSetUserData);
@@ -113,7 +119,9 @@ describe('ConnectionCard component', () => {
 
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     render(<ConnectionCard connection={connectionGithub} setUserData={mockSetUserData} />);
-    const deleteButton = screen.getByRole('button');
+    const deleteButton = screen.getByRole('button', {
+      name: /delete.*connection/i
+    });
     await fireEvent.click(deleteButton);
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(

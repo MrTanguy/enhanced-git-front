@@ -73,7 +73,7 @@ describe('PortfolioCard component', () => {
     render(<PortfolioCard portfolio={mockPortfolio} setUserData={mockSetUserData} />);
 
     fireEvent.click(screen.getAllByRole('button')[3]); // copyToClipboard
-    expect(mockClipboardWriteText).toHaveBeenCalledWith('https://localhost:5173/1234-uuid');
+    expect(mockClipboardWriteText).toHaveBeenCalledWith(`${window.location.origin}/1234-uuid`);
   });
 
   test('opens delete modal when clicking delete icon', () => {
@@ -87,7 +87,7 @@ describe('PortfolioCard component', () => {
     render(<PortfolioCard portfolio={mockPortfolio} setUserData={mockSetUserData} />);
     fireEvent.click(screen.getByAltText(/delete/i));
 
-    fireEvent.click(screen.getByRole('button', { name: /yes, delete/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Confirm delete portfolio/i }));
 
     await waitFor(() => {
       expect(mockDeletePortfolio).toHaveBeenCalledWith(mockPortfolio, mockSetUserData);

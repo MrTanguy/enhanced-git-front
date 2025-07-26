@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import ReactDOM from "react-dom";
-import ModalConnections from '../components/ModalConnections';
+import ModalConnections from '../components/dashboard/ModalConnections';
 import ConnectionCard from '../components/dashboard/ConnectionCard';
 import PortfolioCard from '../components/dashboard/PortfolioCard';
 import apiService from '../services/api/ApiService';

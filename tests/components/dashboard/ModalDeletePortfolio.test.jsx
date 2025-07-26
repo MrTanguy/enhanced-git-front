@@ -21,11 +21,11 @@ describe('ModalDeletePortfolio component', () => {
     expect(
       screen.getByText(/are you sure you want to delete this portfolio\?/i)
     ).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /yes, delete/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Confirm delete portfolio/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /close/i })).toBeInTheDocument();
   });
 
-  test('calls onDelete when clicking "Yes, delete"', () => {
+  test('calls onDelete when clicking "Confirm delete portfolio"', () => {
     render(
       <ModalDeletePortfolio
         onDelete={mockOnDelete}
@@ -33,7 +33,7 @@ describe('ModalDeletePortfolio component', () => {
       />
     );
 
-    fireEvent.click(screen.getByRole('button', { name: /yes, delete/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Confirm delete portfolio/i }));
     expect(mockOnDelete).toHaveBeenCalled();
   });
 

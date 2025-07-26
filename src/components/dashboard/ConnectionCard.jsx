@@ -17,7 +17,7 @@ const ConnectionCard = ({ connection, setUserData }) => {
             github: `https://github.com/${connection.username}`,
             gitlab: `https://gitlab.com/${connection.username}`
         };
-    
+
         const link = links[connection.website.toLowerCase()];
         if (link) {
             window.open(link, "_blank");
@@ -36,11 +36,28 @@ const ConnectionCard = ({ connection, setUserData }) => {
     };
 
     return (
-        <div className='plusCard plusCardConnections' onClick={handleRedirect}>
-            <button className="deleteButton" onClick={handleDelete}>
+        <div
+            className='plusCard plusCardConnections'
+            onClick={handleRedirect}
+            role="button"
+            tabIndex={0}
+            aria-label={`Go to ${connection.website} profile of ${connection.username}`}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter') handleRedirect();
+            }}
+        >
+            <button
+                className="deleteButton"
+                onClick={handleDelete}
+                aria-label={`Delete ${connection.website} connection for ${connection.username}`}
+            >
                 <img src="/cross.svg" alt="Delete" className="deleteIcon" />
             </button>
-            <img className='connectionSvg' src={getIconPath(connection.website)} alt={connection.website} />
+            <img
+                className='connectionSvg'
+                src={getIconPath(connection.website)}
+                alt={`${connection.website} logo`}
+            />
             <p className='titleCard'>{connection.username}</p>
         </div>
     );

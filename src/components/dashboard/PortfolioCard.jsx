@@ -19,8 +19,9 @@ const PortfolioCard = ({ portfolio, setUserData }) => {
     }
 
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(`https://localhost:5173/${portfolio.uuid}`);
-        ToastCustom("URL copied in the clipboard !", "success");
+        const currentUrl = window.location.origin;
+        navigator.clipboard.writeText(`${currentUrl}/${portfolio.uuid}`);
+        ToastCustom("URL copied to clipboard!", "success");
     };
 
     const handleDeletePortfolio = () => {
