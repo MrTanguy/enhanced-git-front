@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import apiService from "../services/api/ApiService";
-import { useEffect, useState, useMemo } from "react";
+import apiService  from "../services/api/ApiService";
+import { useEffect, useState } from "react";
 import '../styles/portfolio.css'
 import DisplayPortfolio from "../components/dndkitPortfolio/DisplayPortfolio";
 
@@ -10,7 +10,7 @@ const Portfolio = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const { getPortfolioData } = useMemo(() => apiService(), []);
+    const { getPortfolioData } = apiService ();
 
     useEffect(() => {
         setLoading(true);
@@ -22,14 +22,13 @@ const Portfolio = () => {
                 setLoading(false);
             })
             .catch(err => {
-                console.error("Erreur lors de la récupération du portfolio :", err);
-                setError("Impossible de charger le portfolio.");
+                setError(err.message);
                 setLoading(false);
             });
-    }, [portfolioUuid, getPortfolioData]);
+    }, [portfolioUuid]);
 
-    if (loading) return <div className="loader"></div>;
-    if (error) return <p style={{ color: "red" }}>{error}</p>;
+    if (loading) return <div style={{ display: "flex", justifyContent: "center", marginTop: "8%" }}><div className="loader"></div></div>;
+    if (error) return <div style={{ display: "flex", justifyContent: "center", marginTop: "8%" }}><p style={{ color: "red", fontSize: 20 }}>{error}</p></div>;
 
     return (
         <div

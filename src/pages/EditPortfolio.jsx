@@ -1,4 +1,4 @@
-import { useRef, useMemo } from "react";
+import { useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DndContext } from "@dnd-kit/core";
@@ -19,9 +19,7 @@ const EditPortfolio = () => {
   const [isUpdated, setIsUpdated] = useState(false);
   const droppableRef = useRef(null);
 
-  const api = useMemo(() => apiService(), []);
-
-  const { getPortfolioData } = api;
+  const { getPortfolioData } = apiService();
 
   const checkIfUpdated = (newItems = listItems, newTitle = title) => {
     const listChanged = JSON.stringify(newItems) !== JSON.stringify(oldListItems);
@@ -49,7 +47,7 @@ const EditPortfolio = () => {
         setError("Impossible de charger le portfolio.");
         setLoading(false);
       });
-  }, [portfolioUuid, getPortfolioData]);
+  }, [portfolioUuid]);
 
   if (loading) return <div className="loader"></div>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;

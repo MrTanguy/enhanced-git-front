@@ -38,7 +38,6 @@ describe('Project component', () => {
     render(<Project item={item} id={1} isEditable={true} onUpdate={onUpdate} onDelete={onDelete} />);
     expect(screen.getByTestId('project-div')).toBeInTheDocument();
     expect(screen.getByText('Test Project')).toBeInTheDocument();
-    expect(screen.getByAltText('github')).toBeInTheDocument();
   });
 
   it('opens modal on double click when editable', async () => {

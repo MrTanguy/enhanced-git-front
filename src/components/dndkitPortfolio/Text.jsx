@@ -68,20 +68,20 @@ export default function Text({ item, id, isEditable, onUpdate, onDelete }) {
   const style = {
     top: `${item.y}%`,
     left: `${item.x}%`,
-    transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : 'translate3d(0, 0, 0)',
+    transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : 'translate3d(0, 0, 0)'
   };
 
   const handleSave = () => {
-    const newContent = editor.getHTML();
+    const newContent = editor.getHTML().replace("<p></p>", "<br>");
     setContent(newContent);
-    onUpdate(id, {'content': newContent});
+    onUpdate(id, { content: newContent });
     setShowModal(false);
   };
 
   const handleDelete = () => {
-    onDelete(id)
-    setShowModal(false)
-  }
+    onDelete(id);
+    setShowModal(false);
+  };
 
   return (
     <>
@@ -93,23 +93,49 @@ export default function Text({ item, id, isEditable, onUpdate, onDelete }) {
         {...listeners}
         onDoubleClick={isEditable ? () => setShowModal(true) : undefined}
         dangerouslySetInnerHTML={{ __html: content }}
+        aria-label="Editable text block"
       />
 
       {showModal && editor && ReactDOM.createPortal(
-        <div className="editorModal" onClick={() => setShowModal(false)}>
-          <div className="editorContent" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="editorModal"
+          onClick={() => setShowModal(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Text editor modal"
+        >
+          <div
+            className="editorContent"
+            onClick={(e) => e.stopPropagation()}
+          >
             <MenuBar editor={editor} />
             <div className="editorBody">
-              <EditorContent editor={editor} className="tiptap-editor" />
+              <EditorContent editor={editor} className="tiptap-editor" aria-label="Text editor input" />
             </div>
-            <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <button className="button" style={{ backgroundColor: '#f44336', color: 'white' }} onClick={handleDelete} >
+            <div
+              style={{
+                marginTop: 10,
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              <button
+                className="button"
+                style={{ backgroundColor: '#f44336', color: 'white' }}
+                onClick={handleDelete}
+                aria-label="Delete text block"
+              >
                 Delete
               </button>
 
               <div style={{ display: 'flex', gap: 8 }}>
-                <button className="button" onClick={handleSave}>Save</button>
-                <button className="button" onClick={() => setShowModal(false)}>Cancel</button>
+                <button className="button" onClick={handleSave} aria-label="Save changes">
+                  Save
+                </button>
+                <button className="button" onClick={() => setShowModal(false)} aria-label="Cancel editing">
+                  Cancel
+                </button>
               </div>
             </div>
           </div>

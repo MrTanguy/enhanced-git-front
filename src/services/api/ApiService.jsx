@@ -42,8 +42,7 @@ const apiService = () => {
 
             if (response.ok) {
                 ToastCustom("Successfully connected !", "success", loadingToast)
-                const data = await response.json();
-                return data
+                return await response.json();
             }
             
             throw new Error()
@@ -139,7 +138,7 @@ const apiService = () => {
     
             setUserData(prevData => ({
                 ...prevData,
-                portfolios: prevData.portfolios ? [...prevData.portfolios, data] : [data] // Évite erreur si `portfolios` est undefined
+                portfolios: prevData.portfolios ? [...prevData.portfolios, data] : [data]
             }));
     
         } catch (error) {
@@ -149,20 +148,18 @@ const apiService = () => {
     };
 
     const getPortfolioData = async (portfolioUuid) => {
-        try {
-            const response = await apiFetch(`${apiUrl}/portfolio/${portfolioUuid}`, {
-                method: "GET"
-            });
+        const response = await apiFetch(`${apiUrl}/portfolio/${portfolioUuid}`, {
+            method: "GET"
+        });
 
-            if (!response.ok) {
-                throw new Error(`Erreur ${response.status}: ${await response.text()}`);
-            }
+        const data = await response.json()
 
-            return await response.json()
-
-        } catch (error) {
-            console.error("Erreur :", error);
+        if (!response.ok) {
+            console.error("Failed to get porfolio data :", data.detail);
+            throw new Error(data.detail);
         }
+
+        return data
     }
 
     const updatePortfolio = async(portfolioUuid, portfolioData) => {

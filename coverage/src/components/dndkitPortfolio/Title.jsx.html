@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.36% </span>
+                <span class="strong">98.8% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>60/61</span>
+                <span class='fraction'>83/84</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.36% </span>
+                <span class="strong">98.8% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>60/61</span>
+                <span class='fraction'>83/84</span>
             </div>
         
             
@@ -134,7 +134,34 @@
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -180,6 +207,16 @@
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
@@ -188,6 +225,23 @@
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -223,10 +277,10 @@ export default function Title({ item, id, onUpdate, onDelete, isEditable }) {
 &nbsp;
   const [showModal, setShowModal] = useState(false);
   const [title, setTitle] = useState(item.<span class="branch-0 cbranch-no" title="branch not covered" >title || 'Title')</span>;
-  const [newTitle, setNewTitle] = useState(title)
-  
-  const className=`draggableTitle ${<span class="branch-0 cbranch-no" title="branch not covered" >isDragging ? 'dragging' : '</span>'}`
-  const style={
+  const [newTitle, setNewTitle] = useState(title);
+&nbsp;
+  const className = `draggableTitle ${<span class="branch-0 cbranch-no" title="branch not covered" >isDragging ? 'dragging' : '</span>'}`;
+  const style = {
     top: `${item.y}%`,
     left: `${item.x}%`,
     transform: <span class="branch-0 cbranch-no" title="branch not covered" >transform</span>
@@ -236,37 +290,64 @@ export default function Title({ item, id, onUpdate, onDelete, isEditable }) {
 &nbsp;
   const handleSave = () =&gt; {
     onUpdate(id, { 'title': newTitle });
-    setTitle(newTitle)
+    setTitle(newTitle);
     setShowModal(false);
   };
 &nbsp;
   const handleDelete = () =&gt; {
-    onDelete(id)
-    setShowModal(false)
-  }
+    onDelete(id);
+    setShowModal(false);
+  };
 &nbsp;
   return (
     &lt;&gt;
-      &lt;div ref={setNodeRef} className={className} style={style} {...attributes} {...listeners} onDoubleClick={isEditable ? () =&gt; setShowModal(true) : undefined}&gt;
+      &lt;div
+        ref={setNodeRef}
+        className={className}
+        style={style}
+        {...attributes}
+        {...listeners}
+        onDoubleClick={isEditable ? () =&gt; setShowModal(true) : undefined}
+        aria-label="draggable title"
+        tabIndex={0}
+      &gt;
         {title}
       &lt;/div&gt;
+&nbsp;
       {showModal &amp;&amp; ReactDOM.createPortal(
-        &lt;div className="modalBackground" data-testid="modal-background" onClick={() =&gt; setShowModal(false)}&gt;
+        &lt;div
+          className="modalBackground"
+          data-testid="modal-background"
+          onClick={() =&gt; setShowModal(false)}
+          aria-modal="true"
+          role="dialog"
+          aria-labelledby={`edit-title-${id}`}
+        &gt;
           &lt;div className="modalDiv" onClick={(e) =&gt; e.stopPropagation()}&gt;
+            &lt;label htmlFor={`input-title-${id}`} id={`edit-title-${id}`} className="sr-only"&gt;
+              Edit title
+            &lt;/label&gt;
             &lt;input
+              id={`input-title-${id}`}
               value={newTitle}
               onChange={e =&gt; setNewTitle(e.target.value)}
+              aria-label="Edit title"
               style={{ width: '100%', padding: '8px', fontSize: '16px', boxSizing: 'border-box' }}
             /&gt;
 &nbsp;
             &lt;div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}&gt;
-              &lt;button className="button" style={{ backgroundColor: '#f44336', color: 'white' }} onClick={handleDelete} &gt;
+              &lt;button
+                className="button"
+                style={{ backgroundColor: '#f44336', color: 'white' }}
+                onClick={handleDelete}
+                aria-label="Delete title"
+              &gt;
                 Delete
               &lt;/button&gt;
 &nbsp;
               &lt;div style={{ display: 'flex', gap: 8 }}&gt;
-                &lt;button className="button" onClick={handleSave}&gt;Save&lt;/button&gt;
-                &lt;button className="button" onClick={() =&gt; setShowModal(false)}&gt;Cancel&lt;/button&gt;
+                &lt;button className="button" onClick={handleSave} aria-label="Save title"&gt;Save&lt;/button&gt;
+                &lt;button className="button" onClick={() =&gt; setShowModal(false)} aria-label="Cancel editing"&gt;Cancel&lt;/button&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
@@ -283,7 +364,7 @@ export default function Title({ item, id, onUpdate, onDelete, isEditable }) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-26T00:05:47.166Z
+                at 2025-07-27T21:50:14.272Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

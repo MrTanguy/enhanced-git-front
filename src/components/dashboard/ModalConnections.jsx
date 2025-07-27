@@ -23,7 +23,7 @@ export default function ModalConnections({ onClose }) {
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="modal-title"
-                tabIndex={-1} // permet au modal de recevoir le focus si besoin
+                tabIndex={-1}
             >
                 <h2 id="modal-title" style={{ position: 'absolute', left: '-9999px', height: '1px', overflow: 'hidden' }}>
                     Connect your account

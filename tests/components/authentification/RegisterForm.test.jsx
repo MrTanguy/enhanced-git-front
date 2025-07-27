@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
-import RegisterForm from '../../../src/components/authentification/RegisterForm';
+import RegisterForm from '../../../src/components/authentication/RegisterForm';
 import { MemoryRouter } from 'react-router-dom';
 
 // Mock de useNavigate de react-router-dom

@@ -15,10 +15,31 @@ const Sidebar = () => {
       <div className={sidebarClass}>
         {isVisible && (
           <div>
-            <p>Elements</p>
-            <Draggable id="draggable-title" type="title">Title</Draggable>
-            <Draggable id="draggable-connection" type="connection">Connection</Draggable>
-            <Draggable id="draggable-text" type="text">Text</Draggable>
+            <p id="sidebar-elements-title">Elements</p>
+            <Draggable
+              id="draggable-title"
+              type="title"
+              aria-label="Draggable title element"
+              aria-describedby="sidebar-elements-title"
+            >
+              Title
+            </Draggable>
+            <Draggable
+              id="draggable-connection"
+              type="connection"
+              aria-label="Draggable connection element"
+              aria-describedby="sidebar-elements-title"
+            >
+              Connection
+            </Draggable>
+            <Draggable
+              id="draggable-text"
+              type="text"
+              aria-label="Draggable text element"
+              aria-describedby="sidebar-elements-title"
+            >
+              Text
+            </Draggable>
           </div>
         )}
       </div>

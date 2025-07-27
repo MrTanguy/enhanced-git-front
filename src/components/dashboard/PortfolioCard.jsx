@@ -25,26 +25,54 @@ const PortfolioCard = ({ portfolio, setUserData }) => {
     };
 
     const handleDeletePortfolio = () => {
-        deletePortfolio(portfolio, setUserData)
+        deletePortfolio(portfolio, setUserData);
         setShowModalDeletePortfolio(false);
     };
 
     return (
-        <div className='plusCard plusCardPortfolios'>
-            <button className="deleteButton" onClick={() => setShowModalDeletePortfolio(true)}>
-                <img src="/cross.svg" alt="Delete" className="deleteIcon" />
+        <div className='plusCard plusCardPortfolios' aria-label={`Portfolio card: ${portfolio.title}`}>
+            <button
+                className="deleteButton"
+                onClick={() => setShowModalDeletePortfolio(true)}
+                aria-label={`Delete portfolio "${portfolio.title}"`}
+            >
+                <img src="/cross.svg" alt="Delete icon" className="deleteIcon" />
             </button>
-            <div className="titleCard">{portfolio.title}</div>
+
+            <div className="titleCard" aria-label={`Portfolio title: ${portfolio.title}`}>
+                {portfolio.title}
+            </div>
+
             <div className="cardButtons">
-                <button className="cardButton" onClick={openInNewTab}><FontAwesomeIcon icon={faArrowUpRightFromSquare} /></button>
-                <button className="cardButton"onClick={edit}><FontAwesomeIcon icon={faPen} /></button>
-                <button className="cardButton" onClick={copyToClipboard}><FontAwesomeIcon icon={faShareFromSquare} /></button>
+                <button
+                    className="cardButton"
+                    onClick={openInNewTab}
+                    aria-label={`Open portfolio "${portfolio.title}" in new tab`}
+                >
+                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                </button>
+
+                <button
+                    className="cardButton"
+                    onClick={edit}
+                    aria-label={`Edit portfolio "${portfolio.title}"`}
+                >
+                    <FontAwesomeIcon icon={faPen} />
+                </button>
+
+                <button
+                    className="cardButton"
+                    onClick={copyToClipboard}
+                    aria-label={`Copy portfolio "${portfolio.title}" URL to clipboard`}
+                >
+                    <FontAwesomeIcon icon={faShareFromSquare} />
+                </button>
             </div>
 
             {showModalDeletePortfolio && ReactDOM.createPortal(
                 <ModalDeletePortfolio
-                    setShowModalDeletePortfolio={setShowModalDeletePortfolio} 
-                    onDelete={handleDeletePortfolio} 
+                    setShowModalDeletePortfolio={setShowModalDeletePortfolio}
+                    onDelete={handleDeletePortfolio}
                 />,
                 document.body
             )}

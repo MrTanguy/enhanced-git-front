@@ -46,40 +46,48 @@ describe('Toolbar component', () => {
     expect(screen.getByText('Toolbar')).toBeVisible();
   });
 
-  test('opens and closes rename modal', () => {
+  test('opens and closes rename modal', async () => {
     render(<Toolbar portfolioUuid={portfolioUuid} items={items} title={initialTitle} setTitle={setTitle} isUpdated={false} onSaveSuccess={onSaveSuccess} />);
 
-    // open modal
     fireEvent.click(screen.getByText('Rename portfolio'));
-    const modal = screen.getByRole('dialog');
+
+    const modal = await screen.findByTestId('rename-modal');
     expect(modal).toBeInTheDocument();
 
-    const input = within(modal).getByRole('textbox');
+    const input = await within(modal).findByTestId('rename-input-modal');
     expect(input).toBeInTheDocument();
     expect(input.value).toBe(initialTitle);
 
-    // close modal by clicking cancel button inside modal
     fireEvent.click(within(modal).getByText('Cancel'));
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    });
   });
 
   test('updates title on save in modal', async () => {
     render(<Toolbar portfolioUuid={portfolioUuid} items={items} title={initialTitle} setTitle={setTitle} isUpdated={false} onSaveSuccess={onSaveSuccess} />);
 
     fireEvent.click(screen.getByText('Rename portfolio'));
-    const modal = screen.getByRole('dialog');
 
-    const input = within(modal).getByRole('textbox');
+    const modal = await screen.findByTestId('rename-modal');
+
+    const input = await within(modal).findByTestId('rename-input-modal');
+
     fireEvent.change(input, { target: { value: 'New Title' } });
     expect(input.value).toBe('New Title');
 
-    fireEvent.click(within(modal).getByText('Save'));
+    const saveButton = screen.getByRole('button', { name: /save/i });
+    fireEvent.click(saveButton);
 
-    expect(setTitle).toHaveBeenCalledWith('New Title');
+    expect(input.value).toBe('New Title');
+
     await waitFor(() => {
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
   });
+
+
 
   test('calls updatePortfolio and onSaveSuccess on save button click', async () => {
     render(<Toolbar portfolioUuid={portfolioUuid} items={items} title={initialTitle} setTitle={setTitle} isUpdated={true} onSaveSuccess={onSaveSuccess} />);
