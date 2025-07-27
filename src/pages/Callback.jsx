@@ -16,7 +16,20 @@ const Callback = () => {
             const site = params.get('site');
 
             if (code) {
-                sendAccessToken(code, site);
+                const doSend = async () => {
+                    try {
+                        const result = await sendAccessToken(code, site);
+                        if (result) {
+                            navigate('/dashboard');
+                        } else {
+                            console.error('Connection failed');
+                        }
+                    } catch (error) {
+                        console.error('Error in sending access token', error);
+                    }
+                };
+                doSend();
+            } else {
                 navigate('/dashboard');
             }
         }

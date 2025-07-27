@@ -2,13 +2,11 @@ import { vi, describe, it, expect, beforeEach } from 'vitest';
 import toast from 'react-hot-toast';
 import ToastCustom from '../../src/components/ToastCustom';
 
-// Mock de react-hot-toast
 vi.mock('react-hot-toast', () => ({
   default: {
     loading: vi.fn(),
     success: vi.fn(),
     error: vi.fn(),
-    // tu peux ajouter d'autres types si besoin (info, warning...)
   },
 }));
 
@@ -66,7 +64,6 @@ describe('ToastCustom util', () => {
     const message = 'Info message';
     const toastId = 'abc123';
 
-    // Ajouter un type 'info' pour test ou utiliser 'success' si tu veux
     ToastCustom(message, 'success', toastId);
 
     expect(toast.success).toHaveBeenCalledWith(message, expect.objectContaining({
