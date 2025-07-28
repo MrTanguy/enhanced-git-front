@@ -7,9 +7,9 @@ describe('Sidebar component', () => {
   it('renders sidebar with draggable elements initially visible', () => {
     render(<Sidebar />);
     
-    expect(screen.getByText('Elements')).toBeInTheDocument();
+    expect(screen.getByText('Components')).toBeInTheDocument();
     expect(screen.getByText('Title')).toBeInTheDocument();
-    expect(screen.getByText('Connection')).toBeInTheDocument();
+    expect(screen.getByText('Project')).toBeInTheDocument();
     expect(screen.getByText('Text')).toBeInTheDocument();
 
     // Le bouton affiche l'icône de flèche gauche (sidebar visible)
@@ -22,15 +22,15 @@ describe('Sidebar component', () => {
 
     const button = screen.getByRole('button', { name: /toggle sidebar/i });
 
-    // Sidebar visible au départ : "Elements" présent
-    expect(screen.getByText('Elements')).toBeInTheDocument();
+    // Sidebar visible au départ : "Components" présent
+    expect(screen.getByText('Components')).toBeInTheDocument();
 
     // Clique pour cacher la sidebar
     fireEvent.click(button);
-    expect(screen.queryByText('Elements')).not.toBeInTheDocument();
+    expect(screen.queryByText('Components')).not.toBeInTheDocument();
 
     // Clique pour réafficher la sidebar
     fireEvent.click(button);
-    expect(screen.getByText('Elements')).toBeInTheDocument();
+    expect(screen.getByText('Components')).toBeInTheDocument();
   });
 });

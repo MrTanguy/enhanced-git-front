@@ -33,7 +33,7 @@ describe('DisplayPortfolio component', () => {
   });
 
   it('renders Project component when item type is connection', () => {
-    const items = [{ type: 'connection', content: 'Mon projet' }];
+    const items = [{ type: 'project', content: 'Mon projet' }];
     render(<DisplayPortfolio items={items} isEditable={false} onItemUpdate={onUpdate} onItemDelete={onDelete} />);
 
     expect(screen.getByTestId('project')).toHaveTextContent('Mon projet');
