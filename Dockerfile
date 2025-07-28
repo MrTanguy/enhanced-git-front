@@ -1,14 +1,15 @@
-FROM node:20-alpine
-
+# Étape 1 : build
+FROM node:20-alpine AS builder
 WORKDIR /app
-
-RUN apk update && apk add --no-cache openssl
-
-COPY package.json ./
+COPY package*.json ./
 RUN npm install
-
 COPY . .
+RUN npm run build
 
-EXPOSE 4321
-
-CMD ["npm", "run", "dev", "--host", "0.0.0.0"]
+# Étape 2 : image finale avec serve
+FROM node:20-alpine
+WORKDIR /app
+RUN npm install -g serve
+COPY --from=builder /app/dist ./dist
+EXPOSE 4000
+CMD ["serve", "-s", "dist", "-l", "4000"]

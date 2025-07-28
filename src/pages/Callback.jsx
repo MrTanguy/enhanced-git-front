@@ -35,7 +35,7 @@ const Callback = () => {
         }
     }, [navigate, sendAccessToken]);
 
-    return <div>Traitement en cours...</div>;
+    return <div>processing in progress...</div>;
 };
 
 export default Callback;

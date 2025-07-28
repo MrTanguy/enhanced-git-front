@@ -32,11 +32,14 @@ const Dashboard = () => {
 
     return(
         <div>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px 20px' }}>
-                <button onClick={handleLogout} style={{ cursor: 'pointer', padding: '6px 12px', fontSize: '14px' }}>
-                    Logout
-                </button>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', padding: 10 }}>
+                <div style={{ display: 'inline-flex' }}>
+                    <button onClick={handleLogout} className="cardButton" style={{padding: 10, fontSize: 15 }}>
+                        Logout
+                    </button>
+                </div>
             </div>
+
 
             <div className='titleDiv'>
                 <div className='titleDiv-font'>Connexions</div>
