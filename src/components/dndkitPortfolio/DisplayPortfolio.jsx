@@ -42,7 +42,7 @@ const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate, onItemDe
                 isEditable={isEditable}
               />
             );
-          case "connection":
+          case "project":
             return (
               <Project 
                 key={index}

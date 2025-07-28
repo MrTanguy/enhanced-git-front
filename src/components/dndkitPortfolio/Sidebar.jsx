@@ -15,7 +15,12 @@ const Sidebar = () => {
       <div className={sidebarClass}>
         {isVisible && (
           <div>
-            <p id="sidebar-elements-title">Elements</p>
+            <div className="titlecontainer">
+              <p id="sidebar-elements-title" className="title">Components</p>
+            </div>
+            <div style={{textAlign: "center", marginBottom: "15px", border: "solid 2px #739BF2", borderRadius: "8px"}}>
+              <p>Drag&Drop a component to add it to your portfolio !</p>
+            </div>
             <Draggable
               id="draggable-title"
               type="title"
@@ -25,12 +30,12 @@ const Sidebar = () => {
               Title
             </Draggable>
             <Draggable
-              id="draggable-connection"
-              type="connection"
-              aria-label="Draggable connection element"
+              id="draggable-project"
+              type="project"
+              aria-label="Draggable project element"
               aria-describedby="sidebar-elements-title"
             >
-              Connection
+              Project
             </Draggable>
             <Draggable
               id="draggable-text"

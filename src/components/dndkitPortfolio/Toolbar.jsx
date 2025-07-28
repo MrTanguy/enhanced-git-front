@@ -40,7 +40,9 @@ const Toolbar = ({ portfolioUuid, items, title, setTitle, isUpdated, onSaveSucce
             <div className={toolbarClass}>
                 {isVisible && (
                     <div>
-                        <p id="toolbar-title">Toolbar</p>
+                        <div className="titlecontainer">
+                            <p id="toolbar-title" className="title">Toolbar</p>
+                        </div>
                         <div aria-label="Current portfolio title">{title}</div>
                         <button className="button" onClick={() => setShowModal(true)} aria-label="Rename portfolio">
                             Rename portfolio

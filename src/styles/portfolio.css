@@ -15,7 +15,7 @@
 
 .sidebarcontainer {
     position: fixed;
-    top: 70px;
+    top: 75px;
     left: 0;
     height: 100vh;
     display: flex;
@@ -43,7 +43,7 @@
 
 .toolbarcontainer {
     position: fixed;
-    top: 70px;
+    top: 75px;
     right: 0;
     height: 100vh;
     display: flex;
@@ -81,3 +81,13 @@
     align-items: center;
 }
 
+.titlecontainer {
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-decoration: underline #739BF2;
+}

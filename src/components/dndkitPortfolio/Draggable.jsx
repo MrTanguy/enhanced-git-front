@@ -15,12 +15,13 @@ export default function Draggable({ id, type, children }) {
       : undefined,
     border: '2px solid white',
     padding: '10px 20px',
-    backgroundColor: '#000',
+    backgroundColor: '#739BF2',
     color: '#fff',
     borderRadius: '8px',
     cursor: 'grab',
     zIndex: isDragging ? 1000 : 'auto',
     position: isDragging ? 'fixed' : 'relative',
+    textAlign: "center"
   };
 
   return (
