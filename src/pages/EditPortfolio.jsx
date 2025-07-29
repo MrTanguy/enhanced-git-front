@@ -19,7 +19,7 @@ const EditPortfolio = () => {
   const [isUpdated, setIsUpdated] = useState(false);
   const droppableRef = useRef(null);
 
-  const { getPortfolioData } = apiService();
+  const { getPortfolioData, getId } = apiService();
 
   const checkIfUpdated = (newItems = listItems, newTitle = title) => {
     const listChanged = JSON.stringify(newItems) !== JSON.stringify(oldListItems);
@@ -28,25 +28,33 @@ const EditPortfolio = () => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
 
-    getPortfolioData(portfolioUuid)
-      .then(data => {
-        const deepCopyContent = JSON.parse(JSON.stringify(data.content));
-        const deepCopyTitle = JSON.parse(JSON.stringify(data.title));
+      try {
+        const userData = await getId();
+        const portfolioData = await getPortfolioData(portfolioUuid);
+
+        if (userData.id !== portfolioData.user_id) {
+          window.location.href = `/${portfolioUuid}`;
+        } 
+
+        const deepCopyContent = JSON.parse(JSON.stringify(portfolioData.content));
+        const deepCopyTitle = JSON.parse(JSON.stringify(portfolioData.title));
 
         setOldListItems(deepCopyContent);
         setListItems(deepCopyContent);
         setOldTitle(deepCopyTitle);
         setTitle(deepCopyTitle);
+      } catch (err) {
+        console.error("[Error] Failed to load portfolio:", err);
+      } finally {
         setLoading(false);
-      })
-      .catch(err => {
-        console.error("Erreur lors de la récupération du portfolio :", err);
-        setError("Impossible de charger le portfolio.");
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, [portfolioUuid]);
 
   if (loading) return <div className="loader"></div>;
@@ -139,7 +147,6 @@ const EditPortfolio = () => {
     setOldTitle(title);
     setIsUpdated(false);
   };
-
 
   return (
     <DndContext onDragEnd={handleDragEnd} modifiers={[snapToGridModifier]}>

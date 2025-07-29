@@ -208,6 +208,18 @@ const apiService = () => {
             console.error("Erreur :", error)
         }
     }
+
+    const getId = async () => {
+        const response = await apiFetch(`${apiUrl}/user/me`, {
+            method: "GET"
+        }, bearerToken, refresh)
+
+        if (!response.ok) {
+            throw new Error(`Unable to get data`);
+        }
+
+        return await response.json();
+    }
     
 
     return {
@@ -219,7 +231,8 @@ const apiService = () => {
         createPortfolio,
         getPortfolioData,
         updatePortfolio,
-        deletePortfolio
+        deletePortfolio,
+        getId
     };
 };
 
