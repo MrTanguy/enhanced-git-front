@@ -14,6 +14,7 @@ const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate, onItemDe
     position: "relative",
     overflow: "hidden",
     backgroundColor: "#fff",
+    borderRadius: "12px"
   };
 
   const combinedRef = (node) => {
