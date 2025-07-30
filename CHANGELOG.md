@@ -20,6 +20,25 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [0.4.0] - 30-07-2025
+
+### Added
+ - CI - ESLint + TU (Vitest)
+ - Unit tests - +90%
+ - ESLing - 0 output 
+ - `/:portfolioUuid/edit` EditPotfolio page (dndkit + Sidebar + Toolbar)
+ - Portfolio components : Project (Connect a Github project) - Text (Complet texte editor based on TipTap) - Title (Title with a specific border)
+ - New Api call `/user/me` to get the user id 
+
+### Changed
+ - docker-compose : updated with last version of Docker
+ - architecutre, adding folders to organise components 
+
+### Fixed
+ - Dedicated css file for components
+
+---
+
 ## [0.3.0] - 31-03-2025
 
 #### Changed 
