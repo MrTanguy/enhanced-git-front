@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import ReactDOM from "react-dom";
-import ModalConnections from '../components/ModalConnections';
-import ConnectionCard from '../components/ConnectionCard';
-import PortfolioCard from '../components/PortfolioCard';
+import ModalConnections from '../components/dashboard/ModalConnections';
+import ConnectionCard from '../components/dashboard/ConnectionCard';
+import PortfolioCard from '../components/dashboard/PortfolioCard';
 import apiService from '../services/api/ApiService';
 import '../styles/dashboard.css'
 
@@ -19,13 +19,28 @@ const Dashboard = () => {
             getUserData()
             .then(data => setUserData(data))
             .catch(error => {
-                console.error("Erreur lors de la récupération des données utilisateur :", error);
+                console.error("An error occured :", error);
             });
         }
     }, [getUserData]);
 
+    const handleLogout = () => {
+        localStorage.removeItem('bearerToken');
+
+        window.location.href = '/login';
+    }
+
     return(
         <div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', padding: 10 }}>
+                <div style={{ display: 'inline-flex' }}>
+                    <button onClick={handleLogout} className="cardButton" style={{padding: 10, fontSize: 15 }}>
+                        Logout
+                    </button>
+                </div>
+            </div>
+
+
             <div className='titleDiv'>
                 <div className='titleDiv-font'>Connexions</div>
                 <div className='titleDiv-underline'></div>
@@ -56,7 +71,7 @@ const Dashboard = () => {
                 </div>
                 {userData && userData.portfolios.length > 0 && (
                     userData.portfolios.map((portfolio, index) => (
-                        <PortfolioCard key={index} portfolio={portfolio} />
+                        <PortfolioCard key={index} portfolio={portfolio} setUserData={setUserData} />
                     ))
                 )}
             </div>

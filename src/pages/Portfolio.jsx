@@ -1,15 +1,16 @@
 import { useParams } from "react-router-dom";
-import apiService from "../services/api/ApiService";
+import apiService  from "../services/api/ApiService";
 import { useEffect, useState } from "react";
 import '../styles/portfolio.css'
+import DisplayPortfolio from "../components/dndkitPortfolio/DisplayPortfolio";
 
 const Portfolio = () => {
     const { portfolioUuid } = useParams();
     const [portfolioData, setPortfolioData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
-    const { getPortfolioData } = apiService();
+
+    const { getPortfolioData } = apiService ();
 
     useEffect(() => {
         setLoading(true);
@@ -17,25 +18,32 @@ const Portfolio = () => {
 
         getPortfolioData(portfolioUuid)
             .then(data => {
-                setPortfolioData(data);
+                setPortfolioData(data?.content || null);
                 setLoading(false);
             })
             .catch(err => {
-                console.error("Erreur lors de la récupération du portfolio :", err);
-                setError("Impossible de charger le portfolio.");
+                setError(err.message);
                 setLoading(false);
             });
     }, [portfolioUuid]);
 
-    if (loading) return <div className="loader"></div>;;
-    if (error) return <p style={{ color: "red" }}>{error}</p>;
+    if (loading) return <div style={{ display: "flex", justifyContent: "center", marginTop: "8%" }}><div className="loader"></div></div>;
+    if (error) return <div style={{ display: "flex", justifyContent: "center", marginTop: "8%" }}><p style={{ color: "red", fontSize: 20 }}>{error}</p></div>;
 
     return (
-        <div>
-            <h1>{portfolioData?.title}</h1>
-            <p>{portfolioData?.description}</p>
+        <div
+          style={{
+            height: "calc(100vh - 70px)",
+            width: "100vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "relative",
+          }}
+        >
+          <DisplayPortfolio items={portfolioData} isEditable={false} />
         </div>
-    );
+      );
 };
 
 export default Portfolio;
