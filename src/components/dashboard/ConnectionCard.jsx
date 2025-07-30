@@ -1,16 +1,12 @@
-import apiService from '../services/api/ApiService';
+import apiService from '../../services/api/ApiService';
 
 const ConnectionCard = ({ connection, setUserData }) => {
     const { deleteConnection } = apiService();
 
     const handleDelete = async (e) => {
-        e.stopPropagation(); // Évite d'exécuter handleRedirect lors du clic sur le bouton supprimer
+        e.stopPropagation();
         try {
-            await deleteConnection(connection.id);
-            setUserData(prevData => ({
-                ...prevData,
-                connections: prevData.connections.filter(conn => conn.id !== connection.id)
-            }));
+            await deleteConnection(connection.id, setUserData);
         } catch (error) {
             console.error("Erreur lors de la suppression :", error);
         }
@@ -21,7 +17,7 @@ const ConnectionCard = ({ connection, setUserData }) => {
             github: `https://github.com/${connection.username}`,
             gitlab: `https://gitlab.com/${connection.username}`
         };
-    
+
         const link = links[connection.website.toLowerCase()];
         if (link) {
             window.open(link, "_blank");
@@ -40,11 +36,28 @@ const ConnectionCard = ({ connection, setUserData }) => {
     };
 
     return (
-        <div className='plusCard plusCardConnections' onClick={handleRedirect}>
-            <button className="deleteButton" onClick={handleDelete}>
-                <img src="/cross.svg" alt="Supprimer" className="deleteIcon" />
+        <div
+            className='plusCard plusCardConnections'
+            onClick={handleRedirect}
+            role="button"
+            tabIndex={0}
+            aria-label={`Go to ${connection.website} profile of ${connection.username}`}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter') handleRedirect();
+            }}
+        >
+            <button
+                className="deleteButton"
+                onClick={handleDelete}
+                aria-label={`Delete ${connection.website} connection for ${connection.username}`}
+            >
+                <img src="/cross.svg" alt="Delete" className="deleteIcon" />
             </button>
-            <img className='connectionSvg' src={getIconPath(connection.website)} alt={connection.website} />
+            <img
+                className='connectionSvg'
+                src={getIconPath(connection.website)}
+                alt={`${connection.website} logo`}
+            />
             <p className='titleCard'>{connection.username}</p>
         </div>
     );

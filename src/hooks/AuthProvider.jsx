@@ -1,4 +1,4 @@
-import { React, createContext, useState, useContext } from "react";
+import { createContext, useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -42,57 +42,49 @@ export const AuthProvider = ({ children }) => {
     };
 
     const login = async (email, password) => {
-        try {
-            const formData = new URLSearchParams();
-            formData.append("username", email);
-            formData.append("password", password);
+        const formData = new URLSearchParams();
+        formData.append("username", email);
+        formData.append("password", password);
 
-            const response = await fetch(`${apiUrl}/auth/token`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: formData,
-                credentials: "include",
-            });
+        const response = await fetch(`${apiUrl}/auth/token`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: formData,
+            credentials: "include",
+        });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || "An error occurred");
-            }
-
-            const data = await response.json();
-            saveToken(data.bearer);
-        } catch (error) {
-            throw error;
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || "An error occurred");
         }
+
+        const data = await response.json();
+        saveToken(data.bearer);
     };
 
     const register = async (email, password) => {
-        try {
-            const formData = new URLSearchParams();
-            formData.append("username", email);
-            formData.append("password", password);
+        const formData = new URLSearchParams();
+        formData.append("username", email);
+        formData.append("password", password);
 
-            const response = await fetch(`${apiUrl}/auth/register`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: formData,
-                credentials: "include",
-            });
+        const response = await fetch(`${apiUrl}/auth/register`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: formData,
+            credentials: "include",
+        });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || "An error occurred");
-            }
-
-            const data = await response.json();
-            saveToken(data.bearer);
-        } catch (error) {
-            throw error;
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || "An error occurred");
         }
+
+        const data = await response.json();
+        saveToken(data.bearer);
     };
 
     return (

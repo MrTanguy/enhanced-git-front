@@ -9,20 +9,33 @@ const Callback = () => {
 
     useEffect(() => {
         if (!isEffectExecuted.current) {
-            isEffectExecuted.current = true; 
+            isEffectExecuted.current = true;
 
             const params = new URLSearchParams(window.location.search);
             const code = params.get('code');
             const site = params.get('site');
 
             if (code) {
-                sendAccessToken(code, site)
-                navigate('/dashboard')
+                const doSend = async () => {
+                    try {
+                        const result = await sendAccessToken(code, site);
+                        if (result) {
+                            navigate('/dashboard');
+                        } else {
+                            console.error('Connection failed');
+                        }
+                    } catch (error) {
+                        console.error('Error in sending access token', error);
+                    }
+                };
+                doSend();
+            } else {
+                navigate('/dashboard');
             }
         }
-    }, [navigate]);
+    }, [navigate, sendAccessToken]);
 
-    return <div>Traitement en cours...</div>;
+    return <div>processing in progress...</div>;
 };
 
 export default Callback;

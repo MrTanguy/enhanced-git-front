@@ -1,0 +1,78 @@
+import { forwardRef } from "react";
+import { useDroppable } from "@dnd-kit/core";
+import Title from "./Title";
+import Project from "./Project";
+import Text from "./Text";
+
+const DisplayPortfolio = forwardRef(({ items, isEditable, onItemUpdate, onItemDelete }, ref) => {
+  const { setNodeRef } = useDroppable({ id: "droppable" });
+
+  const style = {
+    width: "80vw",
+    height: "90vh",
+    border: "1px solid #A6A8AD",
+    position: "relative",
+    overflow: "hidden",
+    backgroundColor: "#fff",
+    borderRadius: "12px"
+  };
+
+  const combinedRef = (node) => {
+    setNodeRef(node);  
+    if (ref) {
+      if (typeof ref === "function") {
+        ref(node);
+      } else {
+        ref.current = node;
+      }
+    }
+  };
+
+  return (
+    <div ref={combinedRef} style={style}>
+      {items.map((item, index) => {
+        switch (item.type) {
+          case "title":
+            return (
+              <Title
+                key={index}
+                item={item}
+                id={index}
+                onUpdate={onItemUpdate}
+                onDelete={onItemDelete}
+                isEditable={isEditable}
+              />
+            );
+          case "project":
+            return (
+              <Project 
+                key={index}
+                item={item}
+                id={index}
+                onUpdate={onItemUpdate}
+                onDelete={onItemDelete}
+                isEditable={isEditable}
+              />
+            )
+          case "text":
+            return (
+              <Text
+                key={index}
+                item={item}
+                id={index}
+                onUpdate={onItemUpdate}
+                onDelete={onItemDelete}
+                isEditable={isEditable}
+              />
+            )
+          default:
+            return <span key={index}>❓ Inconnu</span>;
+        }
+      })}
+    </div>
+  );
+});
+
+DisplayPortfolio.displayName = "DisplayPortfolio";
+
+export default DisplayPortfolio;

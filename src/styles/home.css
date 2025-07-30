@@ -1,0 +1,87 @@
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #F7F1F2;
+  color: #333;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.home-button {
+  background-color: #739BF2;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.2s ease-in-out;
+}
+
+.home-button:hover {
+  background-color: #567acb;
+}
+
+.home-button.large {
+  font-size: 1.1rem;
+  padding: 0.8rem 1.5rem;
+}
+
+.home-main {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.home-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.home-subtitle {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2.5rem;
+}
+
+.home-features {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .home-features {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+.feature-box {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  text-align: center;
+  flex: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.home-cta {
+  margin-top: 2rem;
+}
+
+.home-footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: auto;
+}
