@@ -1,0 +1,28 @@
+networks:
+  traefik:
+    external: true
+  monitoring:
+    external: true
+  enhanced-git-preprod:
+    external: true
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`frontend.enhanced-git.com`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.routers.frontend.tls.certresolver=cloudflare"
+      - "traefik.http.routers.frontend-http.rule=Host(`frontend.enhanced-git.com`)"
+      - "traefik.http.routers.frontend-http.entrypoints=web"
+      - "traefik.http.routers.frontend-http.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+
+    networks:
+      - traefik
+      - enhanced-git-preprod
+      - monitoring
