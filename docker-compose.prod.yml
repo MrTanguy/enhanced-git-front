@@ -3,7 +3,7 @@ networks:
     external: true
   monitoring:
     external: true
-  enhanced-git-preprod:
+  enhanced-git-prod:
     external: true
 
 services:
@@ -13,11 +13,11 @@ services:
       dockerfile: Dockerfile
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`preprod.enhanced-git.com`)"
+      - "traefik.http.routers.frontend.rule=Host(`enhanced-git.com`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.routers.frontend.tls.certresolver=cloudflare"
-      - "traefik.http.routers.frontend-http.rule=Host(`preprod.enhanced-git.com`)"
+      - "traefik.http.routers.frontend-http.rule=Host(`enhanced-git.com`)"
       - "traefik.http.routers.frontend-http.entrypoints=web"
       - "traefik.http.routers.frontend-http.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
@@ -28,9 +28,9 @@ services:
         loki-url: "http://localhost:3100/loki/api/v1/push"
         loki-batch-size: "400"
         loki-retries: "5"
-        loki-external-labels: "app=preprod-front"
+        loki-external-labels: "app=prod-front"
 
     networks:
       - traefik
-      - enhanced-git-preprod
+      - enhanced-git-prod
       - monitoring
