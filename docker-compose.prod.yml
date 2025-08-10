@@ -8,6 +8,7 @@ networks:
 
 services:
   frontend:
+    container_name: prod-front
     build:
       context: .
       dockerfile: Dockerfile
