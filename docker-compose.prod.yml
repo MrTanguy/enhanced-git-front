@@ -7,20 +7,20 @@ networks:
     external: true
 
 services:
-  frontend:
+  prod-front:
     container_name: prod-front
     build:
       context: .
       dockerfile: Dockerfile
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`enhanced-git.com`)"
-      - "traefik.http.routers.frontend.entrypoints=websecure"
-      - "traefik.http.routers.frontend.tls=true"
-      - "traefik.http.routers.frontend.tls.certresolver=cloudflare"
-      - "traefik.http.routers.frontend-http.rule=Host(`enhanced-git.com`)"
-      - "traefik.http.routers.frontend-http.entrypoints=web"
-      - "traefik.http.routers.frontend-http.middlewares=redirect-to-https"
+      - "traefik.http.routers.prod-front.rule=Host(`enhanced-git.com`)"
+      - "traefik.http.routers.prod-front.entrypoints=websecure"
+      - "traefik.http.routers.prod-front.tls=true"
+      - "traefik.http.routers.prod-front.tls.certresolver=cloudflare"
+      - "traefik.http.routers.prod-front.rule=Host(`enhanced-git.com`)"
+      - "traefik.http.routers.prod-front.entrypoints=web"
+      - "traefik.http.routers.prod-front.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "traefik.docker.network=traefik"
     logging:
