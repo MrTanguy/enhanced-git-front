@@ -10,6 +10,8 @@ name: enhanced-git-prod-front
 services:
   prod-front:
     container_name: prod-front
+    environment:
+      VITE_API_URL: ${VITE_API_URL}
     build:
       context: .
       dockerfile: Dockerfile

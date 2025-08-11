@@ -10,6 +10,8 @@ name: enhanced-git-preprod-front
 services:
   preprod-front:
     container_name: preprod-front
+    environment:
+      VITE_API_URL: ${VITE_API_URL}
     build:
       context: .
       dockerfile: Dockerfile
