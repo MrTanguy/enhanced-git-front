@@ -9,6 +9,7 @@ networks:
 name: enhanced-git-prod-front
 services:
   prod-front:
+    image: enhanced-git-front:preprod
     container_name: prod-front
     environment:
       VITE_API_URL: ${VITE_API_URL}
