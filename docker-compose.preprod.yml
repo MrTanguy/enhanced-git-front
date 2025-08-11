@@ -15,14 +15,14 @@ services:
       dockerfile: Dockerfile
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.preprod-front-http.rule=Host(`preprod.enhanced-git.com`)"
+      - "traefik.http.routers.preprod-front-http.entrypoints=web"
+      - "traefik.http.routers.preprod-front-http.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "traefik.http.routers.preprod-front.rule=Host(`preprod.enhanced-git.com`)"
       - "traefik.http.routers.preprod-front.entrypoints=websecure"
       - "traefik.http.routers.preprod-front.tls=true"
       - "traefik.http.routers.preprod-front.tls.certresolver=cloudflare"
-      - "traefik.http.routers.preprod-front.rule=Host(`preprod.enhanced-git.com`)"
-      - "traefik.http.routers.preprod-front.entrypoints=web"
-      - "traefik.http.routers.preprod-front.middlewares=redirect-to-https"
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "traefik.docker.network=traefik"
     logging:
       driver: loki
