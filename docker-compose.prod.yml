@@ -15,8 +15,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        VITE_API_URL: ${VITE_API_URL}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.prod-front-http.rule=Host(`enhanced-git.com`)"
