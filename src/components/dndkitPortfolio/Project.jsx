@@ -19,11 +19,11 @@ export default function Project({ item, id, isEditable, onUpdate, onDelete }) {
   const { getUserData, getAllPublicProjects } = apiService();
 
   const [showModal, setShowModal] = useState(false);
-  const [project, setProject] = useState(item.project)
-  const [newProject, setNewProject] = useState(item.project)
+  const [project, setProject] = useState(item.project);
+  const [newProject, setNewProject] = useState(item.project);
   const [connections, setConnections] = useState();
   const [projects, setProjects] = useState();
-  const [changeProjectStep, setChangeProjectStep] = useState(null)
+  const [changeProjectStep, setChangeProjectStep] = useState(null);
 
   const className = `draggableProjet ${isDragging ? 'dragging' : ''}`;
   const style = {
@@ -44,24 +44,24 @@ export default function Project({ item, id, isEditable, onUpdate, onDelete }) {
   const handleCancel = () => {
     setShowModal(false);
     setChangeProjectStep(null);
-  }
+  };
 
   const handleDelete = () => {
     onDelete(id);
     setShowModal(false);
-  }
+  };
 
   const handleConnectionSelection = async (connection) => {
     setChangeProjectStep("loading");
     const projects = await getAllPublicProjects(connection);
     setProjects(projects);
     setChangeProjectStep("project");
-  }
+  };
 
   const handleProjectSelection = async (_project) => {
     setNewProject(_project);
     setChangeProjectStep(null);
-  }
+  };
 
   const getConnections = async () => {
     setChangeProjectStep("loading");
@@ -87,6 +87,14 @@ export default function Project({ item, id, isEditable, onUpdate, onDelete }) {
         return '/gitlab.svg';
       default:
         return '/default.svg';
+    }
+  };
+
+  const handleBack = () => {
+    if (changeProjectStep === "project") {
+      setChangeProjectStep("connection");
+    } else if (changeProjectStep === "connection") {
+      setChangeProjectStep(null);
     }
   };
 
@@ -199,6 +207,15 @@ export default function Project({ item, id, isEditable, onUpdate, onDelete }) {
               </button>
 
               <div style={{ display: 'flex', gap: 8 }}>
+                {changeProjectStep && (
+                  <button
+                    className="button"
+                    onClick={handleBack}
+                    aria-label="Go back"
+                  >
+                    Back
+                  </button>
+                )}
                 <button className="button" onClick={getConnections} aria-label="Change project">Change project</button>
                 <button className="button" onClick={handleSave} aria-label="Save project">Save</button>
                 <button className="button" onClick={handleCancel} aria-label="Cancel changes">Cancel</button>
@@ -209,5 +226,5 @@ export default function Project({ item, id, isEditable, onUpdate, onDelete }) {
         document.body
       )}
     </>
-  )
+  );
 }
