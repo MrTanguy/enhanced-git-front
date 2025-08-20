@@ -1,0 +1,43 @@
+networks:
+  traefik:
+    external: true
+  monitoring:
+    external: true
+  enhanced-git-preprod:
+    external: true
+
+name: enhanced-git-preprod-front
+services:
+  preprod-front:
+    image: enhanced-git-front:preprod
+    container_name: preprod-front
+    environment:
+      VITE_API_URL: ${VITE_API_URL}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.preprod-front-http.rule=Host(`preprod.enhanced-git.com`)"
+      - "traefik.http.routers.preprod-front-http.entrypoints=web"
+      - "traefik.http.routers.preprod-front-http.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.preprod-front.rule=Host(`preprod.enhanced-git.com`)"
+      - "traefik.http.routers.preprod-front.entrypoints=websecure"
+      - "traefik.http.routers.preprod-front.tls=true"
+      - "traefik.http.routers.preprod-front.tls.certresolver=cloudflare"
+      - "traefik.docker.network=traefik"
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+        loki-batch-size: "400"
+        loki-retries: "5"
+        loki-external-labels: "app=preprod-front"
+
+    networks:
+      - traefik
+      - enhanced-git-preprod
+      - monitoring

@@ -1,4 +1,4 @@
-name: CI - React App
+name: CI | Tests - Linter - Audit 
 
 on:
   pull_request:
@@ -21,6 +21,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Run security audit
+        run: npm audit --audit-level=high
 
       - name: Run linter (ESLint)
         run: npm run lint -- --max-warnings=0
