@@ -20,6 +20,21 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [1.0.0] - 21-08-2025
+
+### Added
+- Continuous Deployment (CD) setup.
+- Dockerfile and docker-compose configuration for production and preproduction.
+- Back button in project selection view.
+
+### Changed
+- Improved error handling in login flow (GitLab integration).
+
+### Fixed
+- Display of connection error messages when logging in via GitLab.
+
+---
+
 ## [0.4.0] - 30-07-2025
 
 ### Added
