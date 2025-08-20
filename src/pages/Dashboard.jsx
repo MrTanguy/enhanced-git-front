@@ -5,6 +5,7 @@ import ConnectionCard from '../components/dashboard/ConnectionCard';
 import PortfolioCard from '../components/dashboard/PortfolioCard';
 import apiService from '../services/api/ApiService';
 import '../styles/dashboard.css'
+import ToastCustom from '../components/ToastCustom';
 
 const Dashboard = () => {
     const [showModalConnections, setShowModalConnections] = useState(false);
@@ -23,6 +24,14 @@ const Dashboard = () => {
             });
         }
     }, [getUserData]);
+
+    useEffect(() => {
+        if (userData && userData.errors.length > 0) {
+            userData.errors.forEach(error => {
+                ToastCustom(error, "error");
+            });
+        }
+    }, [userData]);
 
     const handleLogout = () => {
         localStorage.removeItem('bearerToken');
